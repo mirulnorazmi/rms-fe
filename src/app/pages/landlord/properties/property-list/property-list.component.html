@@ -1,0 +1,68 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-base-content">My Properties</h1>
+      <p class="text-base-content/60">Manage your portfolio and units</p>
+    </div>
+    <button class="btn btn-primary" (click)="openAddModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add Property
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="properties.length === 0" class="flex flex-col items-center justify-center h-64 bg-base-100 rounded-lg border-2 border-dashed border-base-300">
+    <div class="text-6xl mb-4">🏠</div>
+    <h3 class="text-lg font-bold">No properties found</h3>
+    <p class="text-base-content/60 mb-4">Add your first property to get started!</p>
+    <button class="btn btn-primary" (click)="openAddModal()">Add Property</button>
+  </div>
+
+  <!-- Grid Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" *ngIf="properties.length > 0">
+    <div *ngFor="let property of properties" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+      <figure class="h-48 w-full relative">
+        <img [src]="property.imageUrl" [alt]="property.name" class="object-cover w-full h-full" />
+        <div class="absolute top-2 right-2 badge badge-neutral">{{ property.type }}</div>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title flex justify-between items-start">
+          {{ property.name }}
+        </h2>
+        <p class="text-sm text-base-content/60 flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {{ property.address }}
+        </p>
+        
+        <div class="stats shadow w-full mt-4 bg-base-200/50">
+          <div class="stat p-2 place-items-center">
+            <div class="stat-title text-xs">Units</div>
+            <div class="stat-value text-lg">{{ property.totalUnits }}</div>
+          </div>
+          <div class="stat p-2 place-items-center">
+            <div class="stat-title text-xs">Occupancy</div>
+            <div class="stat-value text-lg" [ngClass]="{
+              'text-success': getOccupancyRate(property) >= 80,
+              'text-warning': getOccupancyRate(property) >= 50 && getOccupancyRate(property) < 80,
+              'text-error': getOccupancyRate(property) < 50
+            }">{{ getOccupancyRate(property) }}%</div>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <button class="btn btn-ghost btn-sm text-error" (click)="deleteProperty(property.id)">Delete</button>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/landlord/properties', property.id]">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Property Modal -->
+<app-property-form *ngIf="showAddModal" (close)="closeAddModal()"></app-property-form>
+

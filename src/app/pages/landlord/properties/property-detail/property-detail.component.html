@@ -1,0 +1,95 @@
+<div class="p-6" *ngIf="property; else loading">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+    <div class="flex items-center gap-4">
+      <div class="avatar">
+        <div class="w-20 h-20 rounded-xl">
+          <img [src]="property.imageUrl" [alt]="property.name" />
+        </div>
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-base-content">{{ property.name }}</h1>
+        <p class="text-base-content/60 flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {{ property.address }}
+        </p>
+        <div class="badge badge-neutral mt-1">{{ property.type }}</div>
+      </div>
+    </div>
+    
+    <div class="flex gap-2">
+      <button class="btn btn-ghost" routerLink="/landlord/properties">Back to List</button>
+      <button class="btn btn-primary btn-outline" (click)="openEditPropertyModal()">Edit Property</button>
+    </div>
+  </div>
+
+  <!-- Units Table -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="card-title">Units ({{ property.units.length }})</h2>
+        <button class="btn btn-sm btn-secondary btn-outline" (click)="openAddUnitModal()">+ Add Unit</button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Unit #</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Current Tenant</th>
+              <th>Rent</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let unit of property.units" class="hover">
+              <td class="font-bold">{{ unit.unitNumber }}</td>
+              <td>{{ unit.type }}</td>
+              <td>
+                <div class="badge" [ngClass]="getStatusClass(unit.status)">{{ unit.status }}</div>
+              </td>
+              <td>
+                <div *ngIf="unit.currentTenantName" class="flex items-center gap-2">
+                  <div class="avatar placeholder">
+                    <div class="bg-neutral-focus text-neutral-content rounded-full w-6">
+                      <span>{{ unit.currentTenantName.charAt(0) }}</span>
+                    </div>
+                  </div>
+                  {{ unit.currentTenantName }}
+                </div>
+                <span *ngIf="!unit.currentTenantName" class="text-base-content/40 italic">None</span>
+              </td>
+              <td class="font-mono">{{ unit.rentAmount | currency }}</td>
+              <td>
+                <div class="flex gap-2">
+                  <button class="btn btn-xs btn-ghost" (click)="openEditUnitModal(unit)">Edit</button>
+                  <button class="btn btn-xs btn-ghost text-error" (click)="deleteUnit(unit)">Delete</button>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="property.units.length === 0">
+              <td colspan="6" class="text-center py-8 text-base-content/60">
+                No units added yet. Add a unit to start tracking occupancy.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="flex justify-center items-center h-64">
+    <span class="loading loading-spinner loading-lg text-primary"></span>
+  </div>
+</ng-template>
+
+<!-- Modals -->
+<app-property-form *ngIf="showEditPropertyModal" [property]="property ?? null" (close)="closeEditPropertyModal()"></app-property-form>
+<app-unit-form *ngIf="showUnitModal" [propertyId]="property?.id!" [unit]="selectedUnit" (close)="closeUnitModal()"></app-unit-form>

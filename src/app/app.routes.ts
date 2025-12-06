@@ -5,11 +5,13 @@ import { TenantManagementComponent } from './pages/landlord/tenants/tenant-manag
 import { MaintenanceHubComponent } from './pages/landlord/maintenance/maintenance-hub.component';
 import { FinancialReportsComponent } from './pages/landlord/reports/financial-reports.component';
 import { SmartContractVaultComponent } from './pages/landlord/documents/smart-contract-vault.component';
+import { PropertyListComponent } from './pages/landlord/properties/property-list/property-list.component';
+import { PropertyDetailComponent } from './pages/landlord/properties/property-detail/property-detail.component';
+import { TenantDashboardComponent } from './pages/tenant/dashboard/tenant-dashboard.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HistoryComponent } from './pages/tenant/payment/history/history.component';
 import { SummaryComponent } from './pages/tenant/payment/summary/summary.component';
 import { PayNowComponent } from './pages/tenant/payment/pay-now/pay-now.component';
-import { TenantDashboardComponent } from './pages/tenant/dashboard/tenant-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,6 +23,8 @@ export const routes: Routes = [
   { path: 'landlord/maintenance', component: MaintenanceHubComponent },
   { path: 'landlord/reports', component: FinancialReportsComponent },
   { path: 'landlord/contracts', component: SmartContractVaultComponent },
+  { path: 'landlord/properties', component: PropertyListComponent },
+  { path: 'landlord/properties/:id', component: PropertyDetailComponent },
 
   // Tenant Routes
   { path: 'tenant/dashboard', component: TenantDashboardComponent },

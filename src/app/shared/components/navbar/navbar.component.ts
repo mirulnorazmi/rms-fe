@@ -35,7 +35,8 @@ export class NavbarComponent {
       { id: 'tenants', label: 'My Tenants', route: '/landlord/tenants' },
       { id: 'maintenance', label: 'Maintenance Hub', route: '/landlord/maintenance' },
       { id: 'reports', label: 'Reports', route: '/landlord/reports' },
-      { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' }
+      { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' },
+      { id: 'properties', label: 'Properties', route: '/landlord/properties' }
     ],
     tenant: [
       { id: 'dashboard', label: 'Dashboard', route: '/tenant/dashboard' },

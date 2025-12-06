@@ -44,7 +44,7 @@ export class NavbarComponent {
       { id: 'maintenance', label: 'Property', route: 'tenant/property/details' },
       { id: 'contract', label: 'Contract', route: '/tenant/contract' },
       { id: 'Maintenance', label: 'Maintenance', route: '/tenant/maintenance/tickets' },
-      { id: 'Documents', label: 'Documents', route: '/documents' }
+      { id: 'Documents', label: 'Documents', route: '/tenant/documents' }
     ],
     guest: [
       { id: 'login', label: 'Login', route: '/login' },

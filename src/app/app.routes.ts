@@ -17,6 +17,8 @@ import { ReportIssueComponent } from './pages/tenant/maintenance/report-issue/re
 import { TicketDetailComponent } from './pages/tenant/maintenance/ticket-detail/ticket-detail.component';
 import { NotificationsComponent } from './pages/tenant/notifications/notifications.component';
 import { DocumentVaultComponent } from './pages/tenant/documents/document-vault/document-vault.component';
+import { PropertyListComponent } from './pages/landlord/properties/property-list/property-list.component';
+import { PropertyDetailComponent } from './pages/landlord/properties/property-detail/property-detail.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,6 +30,8 @@ export const routes: Routes = [
   { path: 'landlord/maintenance', component: MaintenanceHubComponent },
   { path: 'landlord/reports', component: FinancialReportsComponent },
   { path: 'landlord/contracts', component: SmartContractVaultComponent },
+  { path: 'landlord/properties', component: PropertyListComponent },
+  { path: 'landlord/properties/:id', component: PropertyDetailComponent },
 
   // Tenant Routes
   { path: 'tenant/dashboard', component: TenantDashboardComponent },
@@ -50,8 +54,8 @@ export const routes: Routes = [
   { path: 'tenant/maintenance', redirectTo: 'tenant/maintenance/tickets', pathMatch: 'full' },
 
   // Tenant Notifications & Documents
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'documents', component: DocumentVaultComponent },
+  { path: 'tenant/notifications', component: NotificationsComponent },
+  { path: 'tenant/documents', component: DocumentVaultComponent },
 
   { path: '**', component: NotFoundComponent },
 ];

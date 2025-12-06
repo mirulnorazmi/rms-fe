@@ -35,7 +35,8 @@ export class NavbarComponent {
       { id: 'tenants', label: 'My Tenants', route: '/landlord/tenants' },
       { id: 'maintenance', label: 'Maintenance Hub', route: '/landlord/maintenance' },
       { id: 'reports', label: 'Reports', route: '/landlord/reports' },
-      { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' }
+      { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' },
+      { id: 'properties', label: 'Properties', route: '/landlord/properties' }
     ],
     tenant: [
       { id: 'dashboard', label: 'Dashboard', route: '/tenant/dashboard' },
@@ -43,7 +44,7 @@ export class NavbarComponent {
       { id: 'maintenance', label: 'Property', route: 'tenant/property/details' },
       { id: 'contract', label: 'Contract', route: '/tenant/contract' },
       { id: 'Maintenance', label: 'Maintenance', route: '/tenant/maintenance/tickets' },
-      { id: 'Documents', label: 'Documents', route: '/documents' }
+      { id: 'Documents', label: 'Documents', route: '/tenant/documents' }
     ],
     guest: [
       { id: 'login', label: 'Login', route: '/login' },

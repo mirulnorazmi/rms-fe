@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-landlord-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './landlord-dashboard.component.html',
   styleUrls: ['./landlord-dashboard.component.css'],
 })
 export class LandlordDashboardComponent {
   userRole = 'Landlord';
   currentDate = new Date();
+  
+  // Modal State
+  isModalOpen = false;
+  selectedAction: any = null;
 
   // Use Case 2 & 6: Financials
   financialStats = {
@@ -52,8 +57,24 @@ export class LandlordDashboardComponent {
 
   // Use Case 15: Automated Workflow triggers
   quickActions = [
-    { label: 'Approve Lease', count: 1, color: 'btn-primary' },
-    { label: 'Review Expenses', count: 0, color: 'btn-secondary' },
-    { label: 'Add Property', count: 0, color: 'btn-outline' }
+    { label: 'View Pending Leases', count: 1, color: 'btn-primary', type: 'lease' },
+    { label: 'View Expenses', count: 0, color: 'btn-secondary', type: 'expense' },
+    { label: 'Add Property', count: 0, color: 'btn-outline', type: 'property' }
   ];
+
+  handleQuickAction(action: any) {
+    this.selectedAction = action;
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedAction = null;
+  }
+
+  processAction() {
+    // Logic to process the action (mock)
+    console.log(`Processed action: ${this.selectedAction?.type}`);
+    this.closeModal();
+  }
 }

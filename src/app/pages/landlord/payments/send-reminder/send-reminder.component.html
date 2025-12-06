@@ -1,0 +1,64 @@
+<div class="p-6 max-w-2xl mx-auto">
+  <div class="text-sm breadcrumbs mb-6">
+    <ul>
+      <li><a routerLink="/landlord/payments/overview">Payments</a></li>
+      <li>Send Reminder</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-6">Send Payment Reminder</h2>
+      
+      <form (ngSubmit)="sendReminder()">
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Select Tenant</span></label>
+          <select class="select select-bordered w-full" [(ngModel)]="reminder.tenantId" name="tenantId">
+            <option disabled selected value="">Choose Tenant</option>
+            <option value="all">All Late Tenants (Batch)</option>
+            <option value="1">Alice Brown (Unit 105) - 5 Days Late</option>
+            <option value="2">Bob White (Unit 202) - 5 Days Late</option>
+          </select>
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Template</span></label>
+          <select class="select select-bordered w-full" [(ngModel)]="reminder.template" name="template" (change)="onTemplateChange()">
+            <option value="overdue">Overdue Notice</option>
+            <option value="upcoming">Upcoming Due Date</option>
+            <option value="custom">Custom Message</option>
+          </select>
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Delivery Method</span></label>
+          <div class="flex gap-4">
+            <label class="label cursor-pointer justify-start gap-2">
+              <input type="radio" name="method" value="email" class="radio radio-primary" [(ngModel)]="reminder.method" />
+              <span class="label-text">Email</span>
+            </label>
+            <label class="label cursor-pointer justify-start gap-2">
+              <input type="radio" name="method" value="sms" class="radio radio-primary" [(ngModel)]="reminder.method" />
+              <span class="label-text">SMS</span>
+            </label>
+            <label class="label cursor-pointer justify-start gap-2">
+              <input type="radio" name="method" value="push" class="radio radio-primary" [(ngModel)]="reminder.method" />
+              <span class="label-text">In-App Notification</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-control w-full mb-6">
+          <label class="label"><span class="label-text">Message Preview</span></label>
+          <textarea class="textarea textarea-bordered h-32" [(ngModel)]="reminder.message" name="message"></textarea>
+        </div>
+
+        <div class="card-actions justify-end">
+          <button type="button" class="btn btn-ghost" routerLink="/landlord/payments/overview">Cancel</button>
+          <button type="submit" class="btn btn-primary">Send Reminder</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,93 @@
+<div class="p-6 space-y-6">
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Document Vault</h1>
+      <p class="text-base-content/60">Securely manage all property and tenant documents.</p>
+    </div>
+    <button class="btn btn-primary" onclick="upload_modal.showModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
+      Upload Document
+    </button>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <!-- Filters -->
+      <div class="flex gap-4 mb-6">
+        <select class="select select-bordered w-full max-w-xs" [(ngModel)]="filters.property">
+          <option value="" selected>All Properties</option>
+          <option value="Sunset Apartments">Sunset Apartments</option>
+          <option value="Downtown Loft">Downtown Loft</option>
+        </select>
+        <select class="select select-bordered w-full max-w-xs" [(ngModel)]="filters.type">
+          <option value="" selected>All Types</option>
+          <option value="Contract">Contracts</option>
+          <option value="Property">Property Docs</option>
+          <option value="Tenant">Tenant Docs</option>
+          <option value="Invoice">Invoices</option>
+        </select>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Document Name</th>
+              <th>Type</th>
+              <th>Property</th>
+              <th>Tenant</th>
+              <th>Date Added</th>
+              <th>Size</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let doc of documents" class="hover">
+              <td class="font-bold flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-base-content/50"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                {{ doc.name }}
+              </td>
+              <td><div class="badge badge-ghost">{{ doc.type }}</div></td>
+              <td>{{ doc.property }}</td>
+              <td>{{ doc.tenant }}</td>
+              <td>{{ doc.date }}</td>
+              <td class="text-xs font-mono opacity-50">{{ doc.size }}</td>
+              <td>
+                <button class="btn btn-ghost btn-xs" [routerLink]="['/landlord/documents', doc.id]">View</button>
+                <button class="btn btn-ghost btn-xs text-primary">Download</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<dialog id="upload_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg mb-4">Upload New Document</h3>
+    <div class="form-control w-full mb-4">
+      <label class="label"><span class="label-text">Document Type</span></label>
+      <select class="select select-bordered w-full">
+        <option disabled selected>Select Type</option>
+        <option>Contract</option>
+        <option>Property Document</option>
+        <option>Tenant Document</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-control w-full mb-6">
+      <label class="label"><span class="label-text">File</span></label>
+      <input type="file" class="file-input file-input-bordered w-full" />
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn btn-ghost mr-2">Cancel</button>
+        <button class="btn btn-primary">Upload</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+

@@ -1,0 +1,100 @@
+<div class="p-6 space-y-6">
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Payment Overview</h1>
+      <p class="text-base-content/60">Track rent collection and outstanding dues.</p>
+    </div>
+    <div class="flex gap-2">
+      <button class="btn btn-outline" routerLink="/landlord/payments/adjustments">Adjustments</button>
+      <button class="btn btn-primary" routerLink="/landlord/payments/reminders">Send Reminders</button>
+    </div>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
+      <div class="stat-title">Total Expected</div>
+      <div class="stat-value text-primary">{{ metrics.totalRent | currency }}</div>
+      <div class="stat-desc">For October 2023</div>
+    </div>
+    <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
+      <div class="stat-title">Collected</div>
+      <div class="stat-value text-success">{{ metrics.collected | currency }}</div>
+      <div class="stat-desc">{{ (metrics.collected / metrics.totalRent) | percent }} collected</div>
+    </div>
+    <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
+      <div class="stat-title">Outstanding</div>
+      <div class="stat-value text-warning">{{ metrics.outstanding | currency }}</div>
+      <div class="stat-desc">Pending collection</div>
+    </div>
+    <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
+      <div class="stat-title">Overdue</div>
+      <div class="stat-value text-error">{{ metrics.overdueCount }}</div>
+      <div class="stat-desc">Tenants late</div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Latest Payments -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="card-title">Latest Payments</h2>
+          <button class="btn btn-link btn-sm" routerLink="/landlord/payments/history">View All</button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table w-full">
+            <thead>
+              <tr>
+                <th>Tenant</th>
+                <th>Unit</th>
+                <th>Amount</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let payment of latestPayments">
+                <td class="font-medium">{{ payment.tenant }}</td>
+                <td>{{ payment.unit }}</td>
+                <td class="text-success font-bold">+{{ payment.amount | currency }}</td>
+                <td class="text-sm">{{ payment.date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overdue List -->
+    <div class="card bg-base-100 shadow-xl border-l-4 border-error">
+      <div class="card-body">
+        <h2 class="card-title text-error mb-4">Overdue Payments</h2>
+        <div class="overflow-x-auto">
+          <table class="table w-full">
+            <thead>
+              <tr>
+                <th>Tenant</th>
+                <th>Due Date</th>
+                <th>Amount</th>
+                <th>Late By</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let due of overdueList">
+                <td class="font-medium">{{ due.tenant }} <span class="text-xs opacity-50">({{ due.unit }})</span></td>
+                <td>{{ due.dueDate }}</td>
+                <td class="font-bold">{{ due.amount | currency }}</td>
+                <td class="text-error font-bold">{{ due.daysLate }} days</td>
+                <td>
+                  <button class="btn btn-xs btn-outline btn-error" routerLink="/landlord/payments/reminders">Remind</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contract-viewer',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './contract-viewer.component.html',
   styles: []
 })
@@ -30,5 +31,24 @@ export class ContractViewerComponent {
     { date: 'Dec 31, 2023', event: 'Lease Expiration', status: 'upcoming' },
     { date: 'Jan 1, 2023', event: 'Lease Started', status: 'completed' }
   ];
-}
 
+  // Renewal Logic
+  isRenewalModalOpen = false;
+  renewalDate = '';
+  renewalTerm = '12';
+  
+  openRenewalModal() {
+    this.isRenewalModalOpen = true;
+  }
+
+  closeRenewalModal() {
+    this.isRenewalModalOpen = false;
+  }
+
+  submitRenewal() {
+    // Logic to submit renewal request
+    console.log('Renewal Requested:', { date: this.renewalDate, term: this.renewalTerm });
+    this.closeRenewalModal();
+    // Add a toast or notification here in a real app
+  }
+}

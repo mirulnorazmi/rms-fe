@@ -35,16 +35,18 @@ export class NavbarComponent {
       { id: 'tenants', label: 'My Tenants', route: '/landlord/tenants' },
       { id: 'maintenance', label: 'Maintenance Hub', route: '/landlord/maintenance' },
       { id: 'reports', label: 'Reports', route: '/landlord/reports' },
-      { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' },
-      { id: 'properties', label: 'Properties', route: '/landlord/properties' }
+      // { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' },
+      { id: 'properties', label: 'Properties', route: '/landlord/properties' },
+      { id: 'payments', label: 'Payments', route: '/landlord/payments' },
+      { id: 'documents', label: 'Documents', route: 'landlord/documents' }
     ],
     tenant: [
       { id: 'dashboard', label: 'Dashboard', route: '/tenant/dashboard' },
       { id: 'payments', label: 'Payments', route: '/tenant/payments' },
       { id: 'maintenance', label: 'Property', route: 'tenant/property/details' },
-      { id: 'contract', label: 'Contract', route: '/tenant/contract' },
+      // { id: 'contract', label: 'Contract', route: '/tenant/contract' },
       { id: 'Maintenance', label: 'Maintenance', route: '/tenant/maintenance/tickets' },
-      { id: 'Documents', label: 'Documents', route: '/documents' }
+      { id: 'Documents', label: 'Documents', route: '/tenant/documents' }
     ],
     guest: [
       { id: 'login', label: 'Login', route: '/login' },

@@ -1,0 +1,75 @@
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col items-center justify-start bg-base-200 min-h-screen">
+    <!-- Page content here -->
+    <div class="navbar bg-base-100 w-full lg:hidden shadow-sm">
+      <div class="flex-none">
+        <label for="my-drawer-2" class="btn btn-square btn-ghost drawer-button">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </label>
+      </div>
+      <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl">Rental App</a>
+      </div>
+    </div>
+
+    <div class="p-8 w-full">
+      <h1 class="text-3xl font-bold mb-6">Dashboard ({{ userRole | titlecase }})</h1>
+      
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="stats shadow bg-base-100 w-full" *ngFor="let stat of stats">
+          <div class="stat">
+            <div class="stat-figure text-primary text-2xl">
+              {{ stat.icon }}
+            </div>
+            <div class="stat-title">{{ stat.title }}</div>
+            <div class="stat-value text-primary text-2xl">{{ stat.value }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions or Recent Activity -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Recent Activity</h2>
+            <ul class="steps steps-vertical w-full">
+              <li class="step step-primary">Rent Paid - Unit 101</li>
+              <li class="step step-primary">Maintenance Request Resolved</li>
+              <li class="step">New Tenant Application</li>
+              <li class="step">Lease Renewal Due</li>
+            </ul>
+          </div>
+        </div>
+
+         <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Quick Actions</h2>
+             <div class="flex flex-wrap gap-2">
+                <button class="btn btn-outline btn-primary">Add Property</button>
+                <button class="btn btn-outline btn-secondary">View Requests</button>
+                <button class="btn btn-outline btn-accent">Message Tenant</button>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  <div class="drawer-side">
+    <label for="my-drawer-2" class="drawer-overlay"></label> 
+    <ul class="menu p-4 w-80 h-full bg-base-100 text-base-content">
+      <!-- Sidebar content here -->
+      <li class="mb-4"><a class="text-2xl font-bold text-primary">Rental App</a></li>
+      <li><a routerLink="/dashboard" class="active">Dashboard</a></li>
+      <li><a routerLink="/notifications">Notifications</a></li>
+      <li><a routerLink="/profile">User Profile</a></li>
+      <li><a routerLink="/documents">Document Vault</a></li>
+      <li><a routerLink="/messages">Messaging Center</a></li>
+      <div class="divider"></div>
+      <li><a routerLink="/login">Logout</a></li>
+    </ul>
+  </div>
+</div>
+

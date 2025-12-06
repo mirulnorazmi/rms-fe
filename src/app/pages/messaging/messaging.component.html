@@ -1,0 +1,87 @@
+<div class="h-[calc(100vh-4rem)] flex bg-base-200 rounded-xl overflow-hidden shadow-xl m-4">
+  <!-- Sidebar / Conversation List -->
+  <div class="w-1/3 bg-base-100 border-r border-base-300 flex flex-col">
+    <div class="p-4 border-b border-base-300">
+      <h2 class="text-xl font-bold">Messages</h2>
+      <div class="form-control mt-2">
+        <input type="text" placeholder="Search..." class="input input-bordered input-sm w-full" />
+      </div>
+    </div>
+    
+    <div class="overflow-y-auto flex-1">
+      <div *ngFor="let conv of conversations" 
+           (click)="selectConversation(conv)"
+           class="flex items-center gap-3 p-4 hover:bg-base-200 cursor-pointer border-b border-base-200"
+           [class.bg-base-200]="selectedConversation?.id === conv.id">
+        <div class="avatar placeholder">
+          <div class="bg-neutral-focus text-neutral-content rounded-full w-12 h-12 flex items-center justify-center bg-primary text-primary-content">
+            <span>{{ conv.avatar }}</span>
+          </div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex justify-between items-baseline">
+            <h3 class="font-bold truncate">{{ conv.name }}</h3>
+            <span class="text-xs opacity-60">{{ conv.time }}</span>
+          </div>
+          <p class="text-sm truncate opacity-70" [class.font-bold]="conv.unread">{{ conv.lastMessage }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Area -->
+  <div class="flex-1 flex flex-col bg-base-100">
+    <div *ngIf="selectedConversation" class="flex-1 flex flex-col">
+      <!-- Header -->
+      <div class="p-4 border-b border-base-300 flex items-center gap-3 shadow-sm z-10">
+         <div class="avatar placeholder">
+          <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10 flex items-center justify-center bg-primary text-primary-content">
+            <span>{{ selectedConversation.avatar }}</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-bold">{{ selectedConversation.name }}</h3>
+          <span class="text-xs text-success">Online</span>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-base-200">
+        <div *ngFor="let msg of messages" class="chat" [ngClass]="msg.sender === 'me' ? 'chat-end' : 'chat-start'">
+          <div class="chat-header opacity-50 text-xs mb-1">
+            {{ msg.sender === 'me' ? 'You' : msg.sender }}
+            <time class="text-xs opacity-50">{{ msg.time }}</time>
+          </div>
+          <div class="chat-bubble" [ngClass]="msg.sender === 'me' ? 'chat-bubble-primary' : 'chat-bubble-secondary'">{{ msg.text }}</div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="p-4 bg-base-100 border-t border-base-300">
+        <div class="flex gap-2">
+          <button class="btn btn-circle btn-ghost">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+            </svg>
+          </button>
+          <input type="text" placeholder="Type a message..." class="input input-bordered w-full" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" />
+          <button class="btn btn-circle btn-primary" (click)="sendMessage()">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!selectedConversation" class="flex-1 flex items-center justify-center bg-base-200 text-base-content/50">
+      <div class="text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-24 h-24 mx-auto mb-4 opacity-20">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+        </svg>
+        <p class="text-xl">Select a conversation to start messaging</p>
+      </div>
+    </div>
+  </div>
+</div>
+

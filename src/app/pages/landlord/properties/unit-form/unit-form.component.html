@@ -1,0 +1,56 @@
+<div class="p-6 max-w-2xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/properties">Properties</a></li>
+      <li><a routerLink="/landlord/properties/1/units">Units</a></li>
+      <li>Add Unit</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold mb-6">Add New Unit</h2>
+      
+      <form (ngSubmit)="saveUnit()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Unit Number</span></label>
+            <input type="text" placeholder="e.g. 101" class="input input-bordered w-full" [(ngModel)]="unit.number" name="number" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Floor</span></label>
+            <input type="text" placeholder="e.g. 1st Floor" class="input input-bordered w-full" [(ngModel)]="unit.floor" name="floor" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Type</span></label>
+            <select class="select select-bordered" [(ngModel)]="unit.type" name="type">
+              <option>Studio</option>
+              <option>1BHK</option>
+              <option>2BHK</option>
+              <option>3BHK</option>
+              <option>Penthouse</option>
+            </select>
+          </div>
+          <div class="form-control w-full">
+             <label class="label"><span class="label-text">Monthly Rent ($)</span></label>
+            <input type="number" class="input input-bordered" [(ngModel)]="unit.rent" name="rent" />
+          </div>
+        </div>
+
+        <div class="form-control w-full mb-6">
+           <label class="label"><span class="label-text">Size (sq ft)</span></label>
+           <input type="text" class="input input-bordered" [(ngModel)]="unit.size" name="size" />
+        </div>
+
+        <div class="card-actions justify-end">
+          <button type="button" class="btn" routerLink="/landlord/properties/1/units">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Unit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

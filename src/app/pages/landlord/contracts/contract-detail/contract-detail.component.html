@@ -1,0 +1,88 @@
+<div class="p-6 max-w-4xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/contracts">Contracts</a></li>
+      <li>{{ contract.id }}</li>
+    </ul>
+  </div>
+
+  <div class="flex justify-between items-start mb-6">
+    <div>
+       <h1 class="text-3xl font-bold">Contract Details</h1>
+       <p class="text-gray-500">ID: {{ contract.id }}</p>
+    </div>
+    <div class="flex gap-2">
+      <div class="badge badge-lg badge-success">{{ contract.status }}</div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Main Info -->
+    <div class="md:col-span-2 space-y-6">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-xl">Agreement Terms</h2>
+          <div class="bg-base-200 p-4 rounded-box h-64 overflow-y-auto whitespace-pre-wrap text-sm">
+            {{ contract.terms }}
+          </div>
+           <div class="card-actions justify-end mt-4">
+            <button class="btn btn-primary btn-sm">Download PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-xl">
+         <div class="card-body">
+            <h2 class="card-title text-xl">Parties & Dates</h2>
+            <div class="grid grid-cols-2 gap-4">
+               <div>
+                 <p class="text-xs text-gray-500">Tenant</p>
+                 <p class="font-medium">{{ contract.tenant }}</p>
+               </div>
+                <div>
+                 <p class="text-xs text-gray-500">Property</p>
+                 <p class="font-medium">{{ contract.property }}</p>
+               </div>
+               <div>
+                 <p class="text-xs text-gray-500">Start Date</p>
+                 <p class="font-medium">{{ contract.startDate }}</p>
+               </div>
+               <div>
+                 <p class="text-xs text-gray-500">End Date</p>
+                 <p class="font-medium">{{ contract.endDate }}</p>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+
+    <!-- Sidebar Actions -->
+    <div class="space-y-6">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-lg">Actions</h2>
+          <div class="flex flex-col gap-2">
+            <button class="btn btn-outline btn-info btn-sm">Renew Contract</button>
+            <button class="btn btn-outline btn-error btn-sm">Terminate Early</button>
+            <button class="btn btn-outline btn-sm">Amend Terms</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <h2 class="card-title text-lg">Version History</h2>
+          <ul class="steps steps-vertical text-sm">
+             <li *ngFor="let v of contract.versions" class="step step-primary">
+               <div class="text-left">
+                 <div class="font-bold">{{ v.version }}</div>
+                 <div class="text-xs">{{ v.date }} - {{ v.type }}</div>
+               </div>
+             </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

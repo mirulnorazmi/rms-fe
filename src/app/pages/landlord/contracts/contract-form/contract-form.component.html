@@ -1,0 +1,66 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/contracts">Contracts</a></li>
+      <li>Create Contract</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold mb-6">Create New Contract</h2>
+      
+      <form (ngSubmit)="saveContract()">
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Tenant Name</span></label>
+          <input type="text" placeholder="e.g. John Doe" class="input input-bordered w-full" [(ngModel)]="contract.tenantName" name="tenantName" required />
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Property</span></label>
+           <select class="select select-bordered" [(ngModel)]="contract.propertyId" name="propertyId">
+              <option disabled selected value="">Pick a property</option>
+              <option value="1">Sunset Apartments - 101</option>
+              <option value="2">Sunset Apartments - 102</option>
+            </select>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Start Date</span></label>
+            <input type="date" class="input input-bordered w-full" [(ngModel)]="contract.startDate" name="startDate" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">End Date</span></label>
+            <input type="date" class="input input-bordered w-full" [(ngModel)]="contract.endDate" name="endDate" required />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+           <div class="form-control w-full">
+            <label class="label"><span class="label-text">Monthly Rent ($)</span></label>
+            <input type="number" class="input input-bordered w-full" [(ngModel)]="contract.rentAmount" name="rentAmount" />
+          </div>
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Security Deposit ($)</span></label>
+            <input type="number" class="input input-bordered w-full" [(ngModel)]="contract.depositAmount" name="depositAmount" />
+          </div>
+        </div>
+
+        <div class="form-control w-full mb-6">
+           <label class="label">
+               <span class="label-text">Terms & Conditions</span>
+               <span class="label-text-alt"><button type="button" class="btn btn-xs btn-outline btn-accent" (click)="generateTerms()">✨ AI Auto-Fill</button></span>
+           </label>
+           <textarea class="textarea textarea-bordered h-48" placeholder="Enter contract terms here..." [(ngModel)]="contract.terms" name="terms"></textarea>
+        </div>
+
+        <div class="card-actions justify-end">
+          <button type="button" class="btn" routerLink="/landlord/contracts">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Contract</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

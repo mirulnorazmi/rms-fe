@@ -1,0 +1,58 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Payments Overview</h1>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="stats shadow bg-base-100 w-full" *ngFor="let stat of stats">
+      <div class="stat">
+        <div class="stat-figure text-primary text-2xl">{{ stat.icon }}</div>
+        <div class="stat-title">{{ stat.title }}</div>
+        <div class="stat-value text-primary">{{ stat.value }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payments Table -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Recent Transactions</h2>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Tenant</th>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payment of payments" class="hover">
+              <td>{{ payment.id }}</td>
+              <td>{{ payment.date }}</td>
+              <td>{{ payment.tenant }}</td>
+              <td>{{ payment.property }}</td>
+              <td>{{ payment.type }}</td>
+              <td class="font-bold">${{ payment.amount }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': payment.status === 'Paid',
+                  'badge-warning': payment.status === 'Pending',
+                  'badge-error': payment.status === 'Overdue'
+                }">{{ payment.status }}</div>
+              </td>
+              <td>
+                <a [routerLink]="['/landlord/payments', payment.id]" class="btn btn-sm btn-ghost">Details</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

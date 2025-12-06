@@ -1,0 +1,33 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/admin/contracts">Contracts</a></li>
+      <li>{{ contractId }}</li>
+      <li>Version History</li>
+    </ul>
+  </div>
+
+  <h1 class="text-3xl font-bold mb-6">Contract History: {{ contractId }}</h1>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <ul class="steps steps-vertical w-full">
+        <li *ngFor="let v of versions" class="step step-primary">
+          <div class="text-left w-full ml-4 mb-6">
+            <div class="flex justify-between items-center">
+               <h3 class="font-bold text-lg">{{ v.version }}</h3>
+               <span class="text-sm text-gray-500">{{ v.date }}</span>
+            </div>
+            <p class="text-sm mt-1"><strong>Modified By:</strong> {{ v.modifiedBy }}</p>
+            <p class="text-sm"><strong>Change:</strong> {{ v.change }}</p>
+            <div class="mt-2">
+                <button class="btn btn-xs btn-outline">View</button>
+                <button class="btn btn-xs btn-ghost">Diff</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

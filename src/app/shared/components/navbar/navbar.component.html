@@ -1,0 +1,71 @@
+<nav class="shadow-md relative z-50 flex flex-col bg-base-100">
+  <!-- TOP ROW: Logo (Left) & User (Right) -->
+  <div class="flex items-center justify-between px-4 py-3">
+    <!-- Logo Area -->
+    <div class="flex items-center gap-3 px-2">
+      <div class="w-8 h-8 rounded bg-linear-to-tr from-indigo-500 to-violet-500 flex items-center justify-center font-bold text-white shadow-lg shadow-indigo-500/30">
+        P
+      </div>
+      <a class="card-title text-2xl font-bold tracking-tight cursor-pointer text-base-content" (click)="selectView.emit('dashboard')" routerLink="/">
+        Rental Management System
+      </a>
+    </div>
+
+    <!-- Right Side: User & Mobile Toggle -->
+    <div class="flex items-center gap-4">
+      <!-- User Profile (Desktop) -->
+      <div class="hidden md:flex items-center gap-3">
+        <div class="text-right">
+          <p class="text-sm font-medium text-base-content">{{ user?.name }}</p>
+          <p class="text-xs text-base-content/60 uppercase">{{ user?.role }}</p>
+        </div>
+        <app-theme-toggle></app-theme-toggle>
+        
+        <img [src]="user?.avatar" class="w-9 h-9 rounded-full border-2 border-base-200 object-cover" />
+        
+        <button (click)="handleLogout()" class="ml-2 text-sm text-error hover:bg-error/10 px-3 py-1 rounded transition-colors">
+          Logout
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden btn btn-ghost text-base-content" (click)="toggleMenu()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW: Navigation Items -->
+  <!-- Desktop: Always visible under logo. Mobile: Hidden unless toggled -->
+  <div class="md:block" [class.hidden]="!isMenuOpen">
+    <div class="max-w-7xl px-4">
+      <!-- DaisyUI Tabs Structure -->
+      <div role="tablist" class="tabs tabs-bordered flex flex-col md:flex-row w-full pt-1">
+        @for (item of menuItems; track item.id) {
+        <a
+          role="tab"
+          [routerLink]="item.route"
+          routerLinkActive="tab-active !border-indigo-500 !text-indigo-600 dark:!text-indigo-400"
+          (click)="isMenuOpen = false"
+          class="tab h-12 text-sm font-medium transition-colors duration-200 text-base-content/70 hover:text-indigo-600 dark:hover:text-indigo-400"
+        >
+          {{ item.label }}
+        </a>
+        }
+      </div>
+      <!-- Mobile Only Logout -->
+      <div class="md:hidden border-t border-base-200 mt-2 pt-2 pb-2">
+        <button (click)="handleLogout()" class="w-full text-left px-4 py-2 text-sm font-medium text-error hover:bg-error/10 rounded-lg flex items-center gap-2">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Overlay Backdrop (Mobile) -->
+@if(isMenuOpen) {
+<div class="fixed inset-0 bg-black/20 z-40 md:hidden" (click)="toggleMenu()"></div>
+}

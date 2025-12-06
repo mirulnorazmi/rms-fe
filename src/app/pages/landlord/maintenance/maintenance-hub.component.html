@@ -1,0 +1,104 @@
+<div class="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-64px)]">
+  <!-- Ticket List -->
+  <div class="col-span-1 bg-base-100 rounded-lg shadow p-4 overflow-y-auto">
+    <h2 class="text-xl font-bold mb-4 flex justify-between items-center">
+      <span>Tickets</span>
+      <span class="badge badge-neutral">{{ tickets.length }}</span>
+    </h2>
+    
+    <div class="flex flex-col gap-3">
+      <div *ngFor="let ticket of tickets" 
+           (click)="selectTicket(ticket)"
+           class="card bg-base-200 hover:bg-base-300 transition-colors cursor-pointer border border-transparent"
+           [class.border-primary]="selectedTicket?.id === ticket.id">
+        <div class="card-body p-4">
+          <div class="flex justify-between items-start mb-2">
+            <div class="badge badge-sm" [ngClass]="getPriorityClass(ticket.priority)">
+              {{ ticket.priority }}
+            </div>
+            <span class="text-xs text-base-content/60">{{ ticket.reportedDate | date:'shortDate' }}</span>
+          </div>
+          <h3 class="font-bold text-sm">{{ ticket.title }}</h3>
+          <p class="text-xs text-base-content/70 line-clamp-2">{{ ticket.description }}</p>
+          <div class="mt-2 flex items-center justify-between">
+            <span class="text-xs font-mono bg-base-100 px-1 rounded">{{ ticket.unitId }}</span>
+            <span class="badge badge-xs badge-outline">{{ ticket.status }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticket Detail -->
+  <div class="col-span-1 lg:col-span-2 bg-base-100 rounded-lg shadow p-6 overflow-y-auto">
+    <div *ngIf="selectedTicket; else noSelection">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <h2 class="text-2xl font-bold">{{ selectedTicket.title }}</h2>
+            <span class="badge" [ngClass]="getPriorityClass(selectedTicket.priority)">{{ selectedTicket.priority }}</span>
+          </div>
+          <div class="flex gap-4 text-sm text-base-content/70">
+             <span class="flex items-center gap-1">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+               </svg>
+               Unit {{ selectedTicket.unitId }}
+             </span>
+             <span class="flex items-center gap-1">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+               </svg>
+               Tenant: {{ selectedTicket.reportedBy }}
+             </span>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <select class="select select-sm select-bordered">
+            <option disabled selected>Update Status</option>
+            <option>In Progress</option>
+            <option>Resolved</option>
+            <option>Closed</option>
+          </select>
+          <button class="btn btn-sm btn-primary">Assign Tech</button>
+        </div>
+      </div>
+
+      <!-- AI Summary Section -->
+      <div class="alert bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-indigo-500 shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div>
+          <h3 class="font-bold text-indigo-700 dark:text-indigo-300 text-sm">AI Insight</h3>
+          <div class="text-sm text-base-content/80">{{ selectedTicket.aiSummary }}</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 class="font-bold mb-2">Description</h3>
+      <p class="mb-6 text-base-content/80 bg-base-200 p-4 rounded-lg">
+        {{ selectedTicket.description }}
+      </p>
+
+      <div class="flex gap-4">
+         <!-- Mock Images -->
+         <div class="w-32 h-32 bg-base-300 rounded-lg flex items-center justify-center text-base-content/30">
+           <span class="text-xs">Image 1</span>
+         </div>
+         <div class="w-32 h-32 bg-base-300 rounded-lg flex items-center justify-center text-base-content/30">
+           <span class="text-xs">Image 2</span>
+         </div>
+      </div>
+      
+    </div>
+    <ng-template #noSelection>
+      <div class="h-full flex flex-col items-center justify-center text-base-content/40">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <p>Select a ticket to view details</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+

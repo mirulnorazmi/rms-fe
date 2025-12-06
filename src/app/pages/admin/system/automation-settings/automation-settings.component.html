@@ -1,0 +1,51 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">Automation & Workflow Settings</h1>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">System Configuration</h2>
+      
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Auto-assign Maintenance Tickets</span>
+          <input type="checkbox" class="toggle toggle-primary" [(ngModel)]="settings.autoAssignTickets" />
+        </label>
+         <p class="text-xs text-gray-500 mb-4">Automatically assign tickets to available technicians based on skill and category.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Auto-Remind Rent Payments</span>
+          <input type="checkbox" class="toggle toggle-primary" [(ngModel)]="settings.autoRemindRent" />
+        </label>
+         <p class="text-xs text-gray-500 mb-4">Send email/SMS reminders to tenants 3 days before due date.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">AI Assistant (Chatbot)</span>
+          <input type="checkbox" class="toggle toggle-accent" [(ngModel)]="settings.aiChatbotEnabled" />
+        </label>
+         <p class="text-xs text-gray-500 mb-4">Enable Claude/Lindy powered chatbot for tenant dashboard.</p>
+      </div>
+
+      <div class="divider"></div>
+      
+       <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Email Notifications</span>
+          <input type="checkbox" class="toggle" [(ngModel)]="settings.emailNotifications" />
+        </label>
+      </div>
+
+      <div class="card-actions justify-end mt-6">
+        <button class="btn btn-primary">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,70 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+       <h1 class="text-3xl font-bold flex items-center gap-2">
+        Predictive Analytics
+        <div class="badge badge-secondary badge-outline">AI Powered</div>
+       </h1>
+       <p class="text-gray-500">Forecasts and insights for the next 30 days</p>
+    </div>
+    <button class="btn btn-outline">Refresh Model</button>
+  </div>
+
+  <!-- Forecast Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="card bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-sm opacity-80">Forecasted Revenue</h2>
+        <div class="text-3xl font-bold">${{ forecast.nextMonthRevenue | number }}</div>
+        <div class="text-xs mt-2 opacity-80">Expected next month</div>
+      </div>
+    </div>
+    <div class="card bg-base-100 shadow-xl border-l-4 border-success">
+      <div class="card-body">
+        <h2 class="card-title text-sm text-gray-500">Occupancy Trend</h2>
+        <div class="text-2xl font-bold text-success">↗ {{ forecast.occupancyTrend }}</div>
+      </div>
+    </div>
+    <div class="card bg-base-100 shadow-xl border-l-4 border-warning">
+      <div class="card-body">
+        <h2 class="card-title text-sm text-gray-500">Predicted Vacancies</h2>
+        <div class="text-2xl font-bold">{{ forecast.predictedVacancies }} Units</div>
+      </div>
+    </div>
+    <div class="card bg-base-100 shadow-xl border-l-4 border-info">
+      <div class="card-body">
+        <h2 class="card-title text-sm text-gray-500">Maintenance Risk</h2>
+        <div class="text-2xl font-bold">{{ forecast.maintenanceRisk }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Insights -->
+  <h2 class="text-xl font-bold mb-4">AI Generated Insights</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div *ngFor="let insight of insights" class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <div class="flex items-center gap-2 mb-2">
+           <div class="badge" [ngClass]="{
+             'badge-success': insight.type === 'opportunity',
+             'badge-error': insight.type === 'risk',
+             'badge-info': insight.type === 'info'
+           }">{{ insight.type | titlecase }}</div>
+        </div>
+        <h3 class="font-bold text-lg">{{ insight.title }}</h3>
+        <p class="text-sm text-gray-600">{{ insight.message }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cashflow Chart Placeholder -->
+  <div class="card bg-base-100 shadow-xl mt-8">
+    <div class="card-body">
+       <h2 class="card-title">Cashflow Projection (6 Months)</h2>
+       <div class="h-64 bg-base-200 rounded-box flex items-center justify-center text-gray-400">
+         [Interactive Chart Component Placeholder]
+       </div>
+    </div>
+  </div>
+</div>
+

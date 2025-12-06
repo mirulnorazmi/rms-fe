@@ -1,0 +1,41 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">All Properties</h1>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Property Name</th>
+              <th>Address</th>
+              <th>Landlord</th>
+              <th>Units</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prop of properties" class="hover">
+              <td class="font-bold">{{ prop.name }}</td>
+              <td>{{ prop.address }}</td>
+              <td>{{ prop.landlord }}</td>
+              <td>{{ prop.units }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': prop.status === 'Active',
+                  'badge-warning': prop.status === 'Maintenance'
+                }">{{ prop.status }}</div>
+              </td>
+              <td>
+                <a [routerLink]="['/admin/properties', prop.id]" class="btn btn-ghost btn-xs">View</a>
+                <button class="btn btn-ghost btn-xs text-error">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

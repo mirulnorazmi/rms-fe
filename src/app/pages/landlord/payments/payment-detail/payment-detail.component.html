@@ -1,0 +1,60 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/payments">Payments</a></li>
+      <li>{{ payment.id }}</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="flex justify-between items-center mb-6">
+         <div>
+            <h2 class="card-title text-2xl font-bold">Payment Details</h2>
+            <p class="text-sm text-gray-500">ID: {{ payment.id }}</p>
+         </div>
+         <div class="badge badge-lg badge-success">{{ payment.status }}</div>
+      </div>
+      
+      <div class="divider"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
+        <div>
+          <h3 class="font-bold mb-2">Transaction Info</h3>
+          <div class="space-y-2 text-sm">
+             <div class="flex justify-between"><span>Amount:</span> <span class="font-bold text-lg">${{ payment.amount }}</span></div>
+             <div class="flex justify-between"><span>Date:</span> <span>{{ payment.date }}</span></div>
+             <div class="flex justify-between"><span>Method:</span> <span>{{ payment.method }}</span></div>
+             <div class="flex justify-between"><span>Period:</span> <span>{{ payment.period }}</span></div>
+          </div>
+        </div>
+         <div>
+          <h3 class="font-bold mb-2">Payer Info</h3>
+          <div class="space-y-2 text-sm">
+             <div class="flex justify-between"><span>Tenant:</span> <span>{{ payment.tenant.name }}</span></div>
+             <div class="flex justify-between"><span>Email:</span> <span>{{ payment.tenant.email }}</span></div>
+             <div class="flex justify-between"><span>Property:</span> <span>{{ payment.property }}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h3 class="font-bold mb-4">Activity Log</h3>
+      <ul class="steps steps-vertical w-full">
+        <li *ngFor="let log of payment.logs" class="step step-primary">
+          <div class="text-left">
+            <div class="font-bold">{{ log.action }}</div>
+            <div class="text-xs opacity-70">{{ log.date }}</div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="card-actions justify-end mt-6">
+        <button class="btn btn-outline">Download Invoice</button>
+        <button class="btn btn-error btn-outline">Refund</button>
+      </div>
+    </div>
+  </div>
+</div>
+

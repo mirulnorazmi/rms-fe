@@ -1,10 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { provideRouter } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        provideRouter([])
+      ]
     }).compileComponents();
   });
 
@@ -20,10 +24,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('rentalFE');
   });
 
-  it('should render title', () => {
+  it('should render main content area', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, rentalFE');
+    expect(compiled.querySelector('main')).toBeTruthy();
+    expect(compiled.querySelector('main')?.classList.contains('min-h-screen')).toBeTruthy();
   });
 });

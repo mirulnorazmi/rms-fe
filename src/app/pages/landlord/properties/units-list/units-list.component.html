@@ -1,0 +1,56 @@
+<div class="p-6">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/properties">Properties</a></li>
+      <li>{{ propertyName }}</li>
+      <li>Units</li>
+    </ul>
+  </div>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Units: {{ propertyName }}</h1>
+    <a routerLink="add" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Add Unit
+    </a>
+  </div>
+
+  <div class="overflow-x-auto bg-base-100 shadow-xl rounded-box">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Unit Number</th>
+          <th>Type</th>
+          <th>Rent</th>
+          <th>Status</th>
+          <th>Current Tenant</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unit of units" class="hover">
+          <td class="font-bold">{{ unit.number }}</td>
+          <td>{{ unit.type }}</td>
+          <td>${{ unit.rent }}</td>
+          <td>
+            <div class="badge" [ngClass]="{
+              'badge-success': unit.status === 'Occupied',
+              'badge-warning': unit.status === 'Vacant',
+              'badge-error': unit.status === 'Maintenance'
+            }">{{ unit.status }}</div>
+          </td>
+          <td>{{ unit.tenant }}</td>
+          <td>
+            <div class="flex gap-2">
+              <a [routerLink]="['/landlord/properties/units', unit.number, 'occupancy']" class="btn btn-xs btn-ghost">Details</a>
+              <a class="btn btn-xs btn-ghost">Edit</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

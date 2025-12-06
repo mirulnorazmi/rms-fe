@@ -1,0 +1,82 @@
+<div class="p-6 max-w-5xl mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Document Vault</h1>
+    <button class="btn btn-primary" onclick="document.getElementById('upload_modal').showModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+      </svg>
+      Upload Document
+    </button>
+  </div>
+
+  <div class="overflow-x-auto bg-base-100 shadow-xl rounded-box">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>Document Name</th>
+          <th>Type</th>
+          <th>Date Added</th>
+          <th>Size</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of documents" class="hover">
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar placeholder">
+                <div class="bg-neutral-focus text-neutral-content rounded-lg w-10 h-10 flex items-center justify-center bg-gray-200">
+                   <span class="text-xl">📄</span>
+                </div>
+              </div>
+              <div class="font-bold">{{ doc.name }}</div>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-ghost badge-sm">{{ doc.type }}</span>
+          </td>
+          <td>{{ doc.date }}</td>
+          <td>{{ doc.size }}</td>
+          <th>
+            <button class="btn btn-ghost btn-xs">Download</button>
+            <button class="btn btn-ghost btn-xs text-error">Delete</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Upload Modal -->
+<dialog id="upload_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">Upload New Document</h3>
+    <div class="form-control w-full mt-4">
+      <label class="label">
+        <span class="label-text">Pick a file</span>
+      </label>
+      <input type="file" class="file-input file-input-bordered w-full" (change)="onFileSelected($event)" />
+    </div>
+     <div class="form-control w-full mt-4">
+      <label class="label">
+        <span class="label-text">Document Type</span>
+      </label>
+      <select class="select select-bordered">
+        <option disabled selected>Pick one</option>
+        <option>Identity (IC/Passport)</option>
+        <option>Contract</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-ghost">Cancel</button>
+        <button class="btn btn-primary ml-2">Upload</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+

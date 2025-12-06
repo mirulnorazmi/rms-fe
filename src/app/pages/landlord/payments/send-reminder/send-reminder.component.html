@@ -12,17 +12,53 @@
       
       <form (ngSubmit)="sendReminder()">
         <div class="form-control w-full mb-4">
-          <label class="label"><span class="label-text">Select Tenant</span></label>
-          <select class="select select-bordered w-full" [(ngModel)]="reminder.tenantId" name="tenantId">
-            <option disabled selected value="">Choose Tenant</option>
-            <option value="all">All Late Tenants (Batch)</option>
-            <option value="1">Alice Brown (Unit 105) - 5 Days Late</option>
-            <option value="2">Bob White (Unit 202) - 5 Days Late</option>
-          </select>
+          <label class="label"><span class="label-text font-medium">Select Tenants</span></label>
+          
+          <!-- Multi-Select Dropdown using details/summary for persistent open state -->
+          <details class="dropdown w-full">
+            <summary class="select select-bordered w-full flex items-center justify-between h-auto py-2 min-h-[3rem] list-none">
+              <div class="flex flex-wrap gap-1">
+                <span *ngIf="reminder.selectedTenants.length === 0" class="text-base-content/60 py-1">Choose Tenants...</span>
+                <span *ngIf="isAllSelected && reminder.selectedTenants.length > 0" class="badge badge-primary my-1">All Tenants Selected</span>
+                
+                <ng-container *ngIf="!isAllSelected && reminder.selectedTenants.length > 0">
+                   <span class="badge badge-neutral my-1">{{ reminder.selectedTenants.length }} Selected</span>
+                </ng-container>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 opacity-50" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            </summary>
+            
+            <ul class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full border border-base-200 mt-1 max-h-60 overflow-y-auto">
+              <li>
+                <label class="label cursor-pointer justify-start gap-3 font-bold hover:bg-base-200">
+                  <input type="checkbox" class="checkbox checkbox-sm checkbox-primary" 
+                         [checked]="isAllSelected" 
+                         (change)="toggleAll()" />
+                  Select All
+                </label>
+              </li>
+              <div class="divider my-0"></div>
+              <li *ngFor="let tenant of tenants">
+                <label class="label cursor-pointer justify-start gap-3 hover:bg-base-200">
+                  <input type="checkbox" class="checkbox checkbox-sm" 
+                         [checked]="reminder.selectedTenants.includes(tenant.id)" 
+                         (change)="toggleTenant(tenant.id)" />
+                  <span class="flex flex-col">
+                    <span class="font-medium">{{ tenant.name }}</span>
+                    <span class="text-xs opacity-70">{{ tenant.unit }} - <span class="text-error">{{ tenant.status }}</span></span>
+                  </span>
+                </label>
+              </li>
+            </ul>
+          </details>
+          
+          <label class="label" *ngIf="reminder.selectedTenants.length === 0">
+            <span class="label-text-alt text-error">Required</span>
+          </label>
         </div>
 
         <div class="form-control w-full mb-4">
-          <label class="label"><span class="label-text">Template</span></label>
+          <label class="label"><span class="label-text font-medium">Template</span></label>
           <select class="select select-bordered w-full" [(ngModel)]="reminder.template" name="template" (change)="onTemplateChange()">
             <option value="overdue">Overdue Notice</option>
             <option value="upcoming">Upcoming Due Date</option>
@@ -31,34 +67,33 @@
         </div>
 
         <div class="form-control w-full mb-4">
-          <label class="label"><span class="label-text">Delivery Method</span></label>
-          <div class="flex gap-4">
-            <label class="label cursor-pointer justify-start gap-2">
-              <input type="radio" name="method" value="email" class="radio radio-primary" [(ngModel)]="reminder.method" />
-              <span class="label-text">Email</span>
+          <label class="label"><span class="label-text font-medium">Delivery Method</span></label>
+          <div class="flex gap-6 p-1">
+            <label class="cursor-pointer flex items-center gap-2">
+              <input type="radio" name="method" value="email" class="radio radio-primary radio-sm" [(ngModel)]="reminder.method" />
+              <span>Email</span>
             </label>
-            <label class="label cursor-pointer justify-start gap-2">
-              <input type="radio" name="method" value="sms" class="radio radio-primary" [(ngModel)]="reminder.method" />
-              <span class="label-text">SMS</span>
+            <label class="cursor-pointer flex items-center gap-2">
+              <input type="radio" name="method" value="sms" class="radio radio-primary radio-sm" [(ngModel)]="reminder.method" />
+              <span>SMS</span>
             </label>
-            <label class="label cursor-pointer justify-start gap-2">
-              <input type="radio" name="method" value="push" class="radio radio-primary" [(ngModel)]="reminder.method" />
-              <span class="label-text">In-App Notification</span>
+            <label class="cursor-pointer flex items-center gap-2">
+              <input type="radio" name="method" value="push" class="radio radio-primary radio-sm" [(ngModel)]="reminder.method" />
+              <span>In-App Notification</span>
             </label>
           </div>
         </div>
 
         <div class="form-control w-full mb-6">
-          <label class="label"><span class="label-text">Message Preview</span></label>
-          <textarea class="textarea textarea-bordered h-32" [(ngModel)]="reminder.message" name="message"></textarea>
+          <label class="label"><span class="label-text font-medium">Message Preview</span></label>
+          <textarea class="textarea textarea-bordered h-32 text-base" [(ngModel)]="reminder.message" name="message"></textarea>
         </div>
 
         <div class="card-actions justify-end">
           <button type="button" class="btn btn-ghost" routerLink="/landlord/payments/overview">Cancel</button>
-          <button type="submit" class="btn btn-primary">Send Reminder</button>
+          <button type="submit" class="btn btn-primary px-8" [disabled]="reminder.selectedTenants.length === 0">Send Reminder</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-

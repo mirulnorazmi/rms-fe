@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { RouterOutlet, Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,16 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
 })
 export class AppComponent {
   title = 'rentalFE';
+  showNavbar = signal(true);
+  private router = inject(Router);
+
+  constructor() {
+    this.router.events.pipe(
+      filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const hiddenRoutes = ['/login', '/register'];
+      const currentUrl = event.urlAfterRedirects.split('?')[0];
+      this.showNavbar.set(!hiddenRoutes.includes(currentUrl));
+    });
+  }
 }

@@ -30,15 +30,8 @@ export class NavbarComponent {
 
   // Menu configurations for each role
   menus = {
-    admin: [
-      { id: 'users', label: 'Users', route: '/admin/users' },
-      { id: 'properties', label: 'Properties', route: '/admin/properties' },
-      { id: 'contracts', label: 'Contracts', route: '/admin/contracts' },
-      { id: 'finance', label: 'Payments', route: '/admin/finance' },
-      { id: 'maintenance', label: 'Maintenance', route: '/admin/maintenance/tickets' },
-      { id: 'reports', label: 'Reports', route: '/reports' }
-    ],
     landlord: [
+      { id: 'dashboard', label: 'Dashboard', route: '/landlord/dashboard' },
       { id: 'my-properties', label: 'My Properties', route: '/landlord/properties' },
       { id: 'tenants', label: 'Tenants', route: '/landlord/tenants' },
       { id: 'finance', label: 'Payments', route: '/landlord/payments' },

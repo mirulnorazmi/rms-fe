@@ -13,11 +13,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Angular 18 requires Node 18^ or 20^
+          node-version: '22' # Angular 18 requires Node 18^ or 20^
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm ci #--legacy-peer-deps
+        run: npm ci --legacy-peer-deps
 
       - name: Run Unit Tests
         run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless

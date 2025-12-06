@@ -11,6 +11,8 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
+// ... existing code ...
+
 export class NavbarComponent {
   authService = inject(AuthService);
   router = inject(Router);
@@ -28,15 +30,8 @@ export class NavbarComponent {
 
   // Menu configurations for each role
   menus = {
-    admin: [
-      { id: 'users', label: 'Users', route: '/admin/users' },
-      { id: 'properties', label: 'Properties', route: '/admin/properties' },
-      { id: 'contracts', label: 'Contracts', route: '/admin/contracts' },
-      { id: 'finance', label: 'Payments', route: '/admin/finance' },
-      { id: 'maintenance', label: 'Maintenance', route: '/admin/maintenance/tickets' },
-      { id: 'reports', label: 'Reports', route: '/reports' }
-    ],
     landlord: [
+      { id: 'dashboard', label: 'Dashboard', route: '/landlord/dashboard' },
       { id: 'my-properties', label: 'My Properties', route: '/landlord/properties' },
       { id: 'tenants', label: 'Tenants', route: '/landlord/tenants' },
       { id: 'finance', label: 'Payments', route: '/landlord/payments' },
@@ -56,9 +51,11 @@ export class NavbarComponent {
 
   get menuItems() {
     const role = this.authService.currentUserRole();
-    // Update user role display
-    this.user.role = role;
     return this.menus[role] || this.menus['guest'];
+  }
+
+  get currentRole() {
+    return this.authService.currentUserRole();
   }
 
   toggleMenu() {

@@ -11,6 +11,8 @@ import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
+// ... existing code ...
+
 export class NavbarComponent {
   authService = inject(AuthService);
   router = inject(Router);
@@ -56,9 +58,11 @@ export class NavbarComponent {
 
   get menuItems() {
     const role = this.authService.currentUserRole();
-    // Update user role display
-    this.user.role = role;
     return this.menus[role] || this.menus['guest'];
+  }
+
+  get currentRole() {
+    return this.authService.currentUserRole();
   }
 
   toggleMenu() {

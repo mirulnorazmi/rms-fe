@@ -1,0 +1,82 @@
+<div class="modal modal-open bg-base-300/50 backdrop-blur-sm">
+  <div class="modal-box w-11/12 max-w-3xl p-0 overflow-hidden shadow-2xl rounded-3xl">
+    
+    <!-- Header -->
+    <div class="bg-base-100 px-8 py-6 border-b border-base-200 flex justify-between items-center">
+      <div>
+        <h3 class="text-2xl font-bold text-base-content">{{ property ? 'Edit Property' : 'Add New Property' }}</h3>
+        <p class="text-base-content/60 text-sm mt-1">{{ property ? 'Update the details of your property.' : 'Enter the details of your new real estate asset.' }}</p>
+      </div>
+      <button type="button" class="btn btn-sm btn-circle btn-ghost" (click)="onCancel()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      </button>
+    </div>
+    
+    <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="p-8 bg-base-100">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Left Column: Basic Info -->
+        <div class="space-y-6">
+          <div class="form-control w-full">
+            <label class="label px-0">
+              <span class="label-text font-medium text-base">Property Name</span>
+            </label>
+            <input type="text" formControlName="name" placeholder="e.g. Sunset Heights" class="input input-lg input-bordered w-full bg-base-200 focus:bg-base-100 transition-colors" [class.input-error]="propertyForm.get('name')?.invalid && propertyForm.get('name')?.touched" />
+            <label class="label px-0 pt-1" *ngIf="propertyForm.get('name')?.invalid && propertyForm.get('name')?.touched">
+              <span class="label-text-alt text-error">Name is required</span>
+            </label>
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label px-0">
+              <span class="label-text font-medium text-base">Property Type</span>
+            </label>
+            <select formControlName="type" class="select select-lg select-bordered w-full bg-base-200 focus:bg-base-100 transition-colors">
+              <option value="Apartment">Apartment Complex</option>
+              <option value="House">Single Family House</option>
+              <option value="Commercial">Commercial Space</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Right Column: Address & Image -->
+        <div class="space-y-6">
+          <div class="form-control w-full">
+            <label class="label px-0">
+              <span class="label-text font-medium text-base">Address</span>
+            </label>
+            <textarea formControlName="address" placeholder="123 Main St, City, State, Zip" class="textarea textarea-lg textarea-bordered h-32 w-full bg-base-200 focus:bg-base-100 transition-colors" [class.textarea-error]="propertyForm.get('address')?.invalid && propertyForm.get('address')?.touched"></textarea>
+            <label class="label px-0 pt-1" *ngIf="propertyForm.get('address')?.invalid && propertyForm.get('address')?.touched">
+              <span class="label-text-alt text-error">Address is required</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Width: Image Upload Mock -->
+      <div class="form-control w-full mt-8">
+        <label class="label px-0">
+          <span class="label-text font-medium text-base">Property Image</span>
+        </label>
+        <div class="border-2 border-dashed border-base-300 rounded-2xl p-8 text-center hover:bg-base-200/50 transition-colors cursor-pointer group relative">
+          <input type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+          <div class="flex flex-col items-center gap-2 text-base-content/60 group-hover:text-primary transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span class="text-sm font-medium">Click to upload or drag and drop</span>
+            <span class="text-xs opacity-70">SVG, PNG, JPG (max. 2MB)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-action mt-8 flex justify-end gap-3">
+        <button type="button" class="btn btn-lg btn-ghost" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn btn-lg btn-primary px-8" [disabled]="propertyForm.invalid">
+          {{ property ? 'Update Property' : 'Create Property' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

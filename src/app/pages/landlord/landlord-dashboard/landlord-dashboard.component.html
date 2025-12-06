@@ -1,0 +1,51 @@
+<div class="drawer lg:drawer-open">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col items-center justify-start bg-base-200 min-h-screen">
+    <!-- Page content here -->
+
+    <div class="p-8 w-full">
+      <h1 class="text-3xl font-bold mb-6">Dashboard ({{ userRole }})</h1>
+      
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="stats shadow bg-base-100 w-full" *ngFor="let stat of stats">
+          <div class="stat">
+            <div class="stat-figure text-primary text-2xl">
+              {{ stat.icon }}
+            </div>
+            <div class="stat-title">{{ stat.title }}</div>
+            <div class="stat-value text-primary text-2xl">{{ stat.value }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions or Recent Activity -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Recent Activity</h2>
+            <ul class="steps steps-vertical w-full">
+              <li class="step step-primary">Rent Paid - Unit 101</li>
+              <li class="step step-primary">Maintenance Request Resolved</li>
+              <li class="step">New Tenant Application</li>
+              <li class="step">Lease Renewal Due</li>
+            </ul>
+          </div>
+        </div>
+
+         <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Quick Actions</h2>
+             <div class="flex flex-wrap gap-2">
+                <button class="btn btn-outline btn-primary">Add Property</button>
+                <button class="btn btn-outline btn-secondary">View Requests</button>
+                <button class="btn btn-outline btn-accent">Message Tenant</button>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+</div>
+

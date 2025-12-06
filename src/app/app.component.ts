@@ -1,12 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { AIAssistantComponent } from './shared/components/ai-assistant/ai-assistant.component';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, NavbarComponent, AIAssistantComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

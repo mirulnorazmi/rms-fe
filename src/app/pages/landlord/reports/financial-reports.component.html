@@ -1,0 +1,103 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold text-base-content mb-6">Financial & Reports</h1>
+
+  <!-- Auto-Generated Reports -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="card bg-base-100 shadow-xl">
+       <div class="card-body">
+         <h2 class="card-title mb-4">Monthly Overview</h2>
+         <div class="overflow-x-auto">
+           <table class="table w-full">
+             <thead>
+               <tr>
+                 <th>Period</th>
+                 <th>Revenue</th>
+                 <th>Expenses</th>
+                 <th>Net Income</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr *ngFor="let report of reports">
+                 <td class="font-medium">{{ report.period }}</td>
+                 <td class="text-success">+{{ report.revenue | currency }}</td>
+                 <td class="text-error">-{{ report.expenses | currency }}</td>
+                 <td class="font-bold">{{ report.netIncome | currency }}</td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Key Metrics</h2>
+        <div class="grid grid-cols-2 gap-4">
+           <div class="stats shadow bg-base-200">
+             <div class="stat">
+               <div class="stat-title">Vacancy Rate</div>
+               <div class="stat-value text-primary">{{ reports[0]?.vacancyRate }}%</div>
+               <div class="stat-desc">Target: < 5%</div>
+             </div>
+           </div>
+           <div class="stats shadow bg-base-200">
+             <div class="stat">
+               <div class="stat-title">Collection Rate</div>
+               <div class="stat-value text-secondary">{{ reports[0]?.rentCollectionRate }}%</div>
+               <div class="stat-desc">Oct 2023</div>
+             </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rent Adjustments -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4 flex justify-between">
+        <span>Rent Adjustment Requests</span>
+        <button class="btn btn-sm btn-outline">New Request</button>
+      </h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Tenant ID</th>
+              <th>Current Rent</th>
+              <th>Proposed Rent</th>
+              <th>Reason</th>
+              <th>Effective Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let adj of adjustments">
+              <td class="font-mono text-xs">{{ adj.tenantId }}</td>
+              <td>{{ adj.currentRent | currency }}</td>
+              <td class="font-bold text-primary">{{ adj.proposedRent | currency }}</td>
+              <td class="text-sm">{{ adj.reason }}</td>
+              <td class="text-sm">{{ adj.effectiveDate | date }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-warning': adj.status === 'Pending',
+                  'badge-success': adj.status === 'Approved',
+                  'badge-error': adj.status === 'Rejected'
+                }">{{ adj.status }}</div>
+              </td>
+              <td>
+                <div class="flex gap-2" *ngIf="adj.status === 'Pending'">
+                  <button class="btn btn-success btn-xs" (click)="approveAdjustment(adj.id)">Approve</button>
+                  <button class="btn btn-error btn-xs" (click)="rejectAdjustment(adj.id)">Reject</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

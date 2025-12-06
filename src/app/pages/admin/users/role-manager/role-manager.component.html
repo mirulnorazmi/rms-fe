@@ -1,0 +1,43 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Role & Permission Manager (RBAC)</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Roles List -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Roles</h2>
+        <ul class="menu bg-base-200 w-full rounded-box">
+          <li *ngFor="let role of roles">
+            <a class="flex justify-between">
+              {{ role.name }}
+              <span class="badge badge-sm">{{ role.permissions.length }} perms</span>
+            </a>
+          </li>
+          <li><a>+ Add New Role</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Permissions Editor -->
+    <div class="col-span-2 card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Edit Permissions: Admin</h2>
+        <div class="divider"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div *ngFor="let perm of allPermissions" class="form-control">
+            <label class="label cursor-pointer justify-start gap-3">
+              <input type="checkbox" class="checkbox checkbox-primary" [checked]="true" />
+              <span class="label-text">{{ perm }}</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end mt-6">
+          <button class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

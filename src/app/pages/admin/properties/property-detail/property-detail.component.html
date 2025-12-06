@@ -1,0 +1,75 @@
+<div class="p-6 max-w-4xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/admin/properties">Properties</a></li>
+      <li>{{ property.name }}</li>
+    </ul>
+  </div>
+
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">{{ property.name }}</h1>
+    <div class="badge badge-lg badge-success">{{ property.status }}</div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Property Details</h2>
+        <p><strong>Address:</strong> {{ property.address }}</p>
+        <div class="divider"></div>
+        <h3 class="font-bold">Landlord Info</h3>
+        <p><strong>Name:</strong> {{ property.landlord.name }}</p>
+        <p><strong>Email:</strong> {{ property.landlord.email }}</p>
+        <p><strong>Phone:</strong> {{ property.landlord.phone }}</p>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+       <div class="card-body">
+         <h2 class="card-title">Occupancy Stats</h2>
+         <div class="stats shadow w-full">
+            <div class="stat place-items-center">
+              <div class="stat-title">Total Units</div>
+              <div class="stat-value">{{ property.units.length }}</div>
+            </div>
+            <div class="stat place-items-center">
+              <div class="stat-title">Vacant</div>
+              <div class="stat-value text-warning">1</div>
+            </div>
+         </div>
+       </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Units</h2>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Unit #</th>
+              <th>Tenant</th>
+              <th>Rent</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let unit of property.units">
+              <td class="font-bold">{{ unit.number }}</td>
+              <td>{{ unit.tenant }}</td>
+              <td>${{ unit.rent }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': unit.status === 'Occupied',
+                  'badge-warning': unit.status === 'Vacant'
+                }">{{ unit.status }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

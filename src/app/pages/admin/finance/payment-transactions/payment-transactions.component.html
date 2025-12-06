@@ -1,0 +1,49 @@
+<div class="p-6">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/admin/finance">Finance</a></li>
+      <li>Transactions</li>
+    </ul>
+  </div>
+  <h1 class="text-3xl font-bold mb-6">All Transactions</h1>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Date</th>
+              <th>Payer</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let txn of transactions" class="hover">
+              <td class="font-mono">{{ txn.id }}</td>
+              <td>{{ txn.date }}</td>
+              <td>{{ txn.payer }}</td>
+              <td>{{ txn.type }}</td>
+              <td class="font-bold">${{ txn.amount }}</td>
+              <td>
+                 <div class="badge" [ngClass]="{
+                  'badge-success': txn.status === 'Success',
+                  'badge-error': txn.status === 'Failed',
+                  'badge-warning': txn.status === 'Pending'
+                }">{{ txn.status }}</div>
+              </td>
+              <td>
+                <button class="btn btn-ghost btn-xs">Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

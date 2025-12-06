@@ -1,0 +1,63 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">User Management</h1>
+    <a routerLink="add" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3.75 15h2.25c4.28 0 7.2-2.82 7.2-7.2V15m0 0h2.25m-2.25 0a2.25 2.25 0 1 1 4.5 0 2.25 2.25 0 0 1-4.5 0Z" />
+      </svg>
+      Add New User
+    </a>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" class="hover">
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="avatar placeholder">
+                    <div class="bg-neutral-focus text-neutral-content rounded-full w-10 h-10 bg-gray-300 flex items-center justify-center">
+                      <span>{{ user.name.charAt(0) }}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">{{ user.name }}</div>
+                    <div class="text-sm opacity-50">{{ user.email }}</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="badge badge-outline" [ngClass]="{
+                  'badge-primary': user.role === 'Admin',
+                  'badge-secondary': user.role === 'Landlord',
+                  'badge-accent': user.role === 'Tenant'
+                }">{{ user.role }}</span>
+              </td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': user.status === 'Active',
+                  'badge-error': user.status === 'Inactive'
+                }">{{ user.status }}</div>
+              </td>
+              <td>
+                <a [routerLink]="['/admin/users', user.id, 'edit']" class="btn btn-ghost btn-xs">Edit</a>
+                <button class="btn btn-ghost btn-xs text-error">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,57 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Finance Dashboard</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="stats shadow bg-base-100 w-full" *ngFor="let stat of stats">
+      <div class="stat">
+        <div class="stat-figure text-2xl">{{ stat.icon }}</div>
+        <div class="stat-title">{{ stat.title }}</div>
+        <div class="stat-value" [ngClass]="stat.class">{{ stat.value }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Recent Transactions</h2>
+        <table class="table w-full">
+          <tbody>
+            <tr>
+              <td>Payment #9923</td>
+              <td>Oct 25</td>
+              <td class="text-right font-bold text-success">+$1,200</td>
+            </tr>
+             <tr>
+              <td>Payment #9922</td>
+              <td>Oct 25</td>
+              <td class="text-right font-bold text-success">+$1,200</td>
+            </tr>
+             <tr>
+              <td>Refund #442</td>
+              <td>Oct 24</td>
+              <td class="text-right font-bold text-error">-$500</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card-actions justify-end mt-2">
+          <button class="btn btn-link btn-sm" routerLink="/admin/finance/transactions">View All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Dispute Overview</h2>
+        <div class="flex flex-col gap-2">
+           <div class="alert alert-warning">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+             <span>2 Open Disputes require review.</span>
+             <button class="btn btn-xs" routerLink="/admin/finance/disputes">Review</button>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

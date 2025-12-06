@@ -1,0 +1,55 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Technician Assignment</h1>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Technicians List -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Available Technicians</h2>
+        <div class="overflow-x-auto">
+          <table class="table w-full">
+            <tbody>
+              <tr *ngFor="let tech of technicians">
+                <td>
+                  <div class="font-bold">{{ tech.name }}</div>
+                  <div class="text-xs opacity-50">{{ tech.skill }}</div>
+                </td>
+                <td>
+                   <div class="badge" [ngClass]="{
+                    'badge-success': tech.status === 'Available',
+                    'badge-warning': tech.status === 'Busy'
+                  }">{{ tech.status }}</div>
+                </td>
+                <td>{{ tech.activeJobs }} active jobs</td>
+                <td>
+                  <button class="btn btn-xs btn-outline" [disabled]="tech.status === 'Busy'">Assign</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unassigned Tickets -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">Unassigned Tickets</h2>
+        <div class="space-y-4">
+           <div *ngFor="let ticket of unassignedTickets" class="alert shadow-sm border border-base-200">
+             <div>
+               <h3 class="font-bold">{{ ticket.title }}</h3>
+               <div class="text-xs">ID: {{ ticket.id }} • {{ ticket.category }}</div>
+               <div class="text-xs opacity-70">{{ ticket.property }}</div>
+             </div>
+             <button class="btn btn-sm btn-primary">Select</button>
+           </div>
+           <div *ngIf="unassignedTickets.length === 0" class="text-center py-4 text-gray-500">
+             No pending assignments.
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

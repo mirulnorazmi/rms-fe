@@ -1,0 +1,42 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Contract Master List</h1>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Contract ID</th>
+              <th>Property</th>
+              <th>Tenant</th>
+              <th>Landlord</th>
+              <th>Duration</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contract of contracts" class="hover">
+              <td class="font-bold">{{ contract.id }}</td>
+              <td>{{ contract.property }}</td>
+              <td>{{ contract.tenant }}</td>
+              <td>{{ contract.landlord }}</td>
+              <td>{{ contract.startDate }} - {{ contract.endDate }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': contract.status === 'Active',
+                  'badge-error': contract.status === 'Expired'
+                }">{{ contract.status }}</div>
+              </td>
+              <td>
+                 <a [routerLink]="['/admin/contracts', contract.id, 'versions']" class="btn btn-ghost btn-xs">History</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

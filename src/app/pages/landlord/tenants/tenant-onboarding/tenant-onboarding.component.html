@@ -1,0 +1,118 @@
+<div class="p-6 max-w-3xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/tenants">Tenants</a></li>
+      <li>Onboarding Wizard</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold mb-6 text-center justify-center">Tenant Onboarding</h2>
+      
+      <ul class="steps w-full mb-8">
+        <li class="step" [class.step-primary]="step >= 1">Personal Info</li>
+        <li class="step" [class.step-primary]="step >= 2">Property Details</li>
+        <li class="step" [class.step-primary]="step >= 3">Documents</li>
+        <li class="step" [class.step-primary]="step >= 4">Review</li>
+      </ul>
+
+      <!-- Step 1: Personal Info -->
+      <div *ngIf="step === 1">
+        <h3 class="font-bold text-lg mb-4">Personal Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="form-control">
+            <label class="label"><span class="label-text">First Name</span></label>
+            <input type="text" [(ngModel)]="tenantData.personal.firstName" class="input input-bordered" />
+          </div>
+          <div class="form-control">
+            <label class="label"><span class="label-text">Last Name</span></label>
+            <input type="text" [(ngModel)]="tenantData.personal.lastName" class="input input-bordered" />
+          </div>
+           <div class="form-control">
+            <label class="label"><span class="label-text">Email</span></label>
+            <input type="email" [(ngModel)]="tenantData.personal.email" class="input input-bordered" />
+          </div>
+           <div class="form-control">
+            <label class="label"><span class="label-text">Phone</span></label>
+            <input type="tel" [(ngModel)]="tenantData.personal.phone" class="input input-bordered" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Property Details -->
+      <div *ngIf="step === 2">
+         <h3 class="font-bold text-lg mb-4">Property Assignment</h3>
+         <div class="grid grid-cols-1 gap-4">
+            <div class="form-control">
+              <label class="label"><span class="label-text">Select Property</span></label>
+              <select class="select select-bordered" [(ngModel)]="tenantData.property.propertyId">
+                <option disabled selected>Pick one</option>
+                <option value="1">Sunset Apartments</option>
+                <option value="2">Downtown Condo</option>
+              </select>
+            </div>
+            <div class="form-control">
+              <label class="label"><span class="label-text">Select Unit</span></label>
+              <select class="select select-bordered" [(ngModel)]="tenantData.property.unitId">
+                <option disabled selected>Pick one</option>
+                <option value="101">Unit 101</option>
+                <option value="102">Unit 102</option>
+              </select>
+            </div>
+             <div class="grid grid-cols-2 gap-4">
+              <div class="form-control">
+                <label class="label"><span class="label-text">Lease Start</span></label>
+                <input type="date" [(ngModel)]="tenantData.property.leaseStart" class="input input-bordered" />
+              </div>
+              <div class="form-control">
+                <label class="label"><span class="label-text">Lease End</span></label>
+                <input type="date" [(ngModel)]="tenantData.property.leaseEnd" class="input input-bordered" />
+              </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Step 3: Documents -->
+      <div *ngIf="step === 3">
+        <h3 class="font-bold text-lg mb-4">Document Upload</h3>
+        <div class="form-control w-full">
+          <label class="label"><span class="label-text">Upload Signed Lease Agreement</span></label>
+          <input type="file" class="file-input file-input-bordered w-full" />
+        </div>
+         <div class="form-control w-full mt-4">
+          <label class="label"><span class="label-text">Upload ID Proof</span></label>
+          <input type="file" class="file-input file-input-bordered w-full" />
+        </div>
+      </div>
+
+      <!-- Step 4: Review -->
+      <div *ngIf="step === 4">
+        <h3 class="font-bold text-lg mb-4">Review & Confirm</h3>
+        <div class="bg-base-200 p-4 rounded-lg space-y-2">
+          <p><strong>Name:</strong> {{ tenantData.personal.firstName }} {{ tenantData.personal.lastName }}</p>
+          <p><strong>Email:</strong> {{ tenantData.personal.email }}</p>
+          <p><strong>Property:</strong> Sunset Apartments</p>
+          <p><strong>Unit:</strong> 101</p>
+          <p><strong>Lease:</strong> {{ tenantData.property.leaseStart }} to {{ tenantData.property.leaseEnd }}</p>
+        </div>
+        <div class="form-control mt-4">
+          <label class="label cursor-pointer justify-start gap-2">
+            <input type="checkbox" class="checkbox checkbox-primary" />
+            <span class="label-text">Send invitation email to tenant</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="card-actions justify-between mt-8">
+        <button class="btn" *ngIf="step > 1" (click)="prevStep()">Back</button>
+        <button class="btn btn-ghost" *ngIf="step === 1" routerLink="/landlord/tenants">Cancel</button>
+        
+        <button class="btn btn-primary" *ngIf="step < 4" (click)="nextStep()">Next</button>
+        <button class="btn btn-success" *ngIf="step === 4" (click)="finishOnboarding()">Complete Onboarding</button>
+      </div>
+    </div>
+  </div>
+</div>
+

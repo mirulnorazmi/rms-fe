@@ -1,0 +1,37 @@
+<div class="min-h-screen bg-base-200 flex items-center justify-center p-4">
+  <div class="card w-full max-w-sm shadow-2xl bg-base-100">
+    <div class="card-body">
+      <h2 class="card-title justify-center text-3xl font-bold mb-6 text-primary">Login</h2>
+      
+      <form>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Email or Phone</span>
+          </label>
+          <input type="text" placeholder="email@example.com" class="input input-bordered" required />
+        </div>
+
+        <!-- OTP Section (Simplified for UI) -->
+        <div class="form-control mt-4">
+          <label class="label">
+            <span class="label-text">OTP</span>
+          </label>
+          <input type="text" placeholder="Enter OTP" class="input input-bordered tracking-widest text-center" />
+          <label class="label">
+            <span class="label-text-alt link link-primary">Send OTP</span>
+          </label>
+        </div>
+
+        <div class="form-control mt-6">
+          <button class="btn btn-primary">Login</button>
+        </div>
+        
+        <div class="text-center mt-4">
+          <span class="text-sm">Don't have an account? </span>
+          <a routerLink="/register" class="link link-primary text-sm font-bold">Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,73 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Financial Report</h1>
+    <div class="join">
+      <button class="btn join-item btn-sm">Export PDF</button>
+      <button class="btn join-item btn-sm">Export CSV</button>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="stats shadow bg-base-100 w-full">
+      <div class="stat">
+        <div class="stat-title">Total Revenue</div>
+        <div class="stat-value text-success">${{ summary.totalRevenue | number }}</div>
+        <div class="stat-desc">{{ period }}</div>
+      </div>
+    </div>
+    <div class="stats shadow bg-base-100 w-full">
+      <div class="stat">
+        <div class="stat-title">Total Expenses</div>
+        <div class="stat-value text-error">${{ summary.totalExpenses | number }}</div>
+        <div class="stat-desc">{{ period }}</div>
+      </div>
+    </div>
+     <div class="stats shadow bg-base-100 w-full">
+      <div class="stat">
+        <div class="stat-title">Net Income</div>
+        <div class="stat-value text-primary">${{ summary.netIncome | number }}</div>
+        <div class="stat-desc">{{ period }}</div>
+      </div>
+    </div>
+     <div class="stats shadow bg-base-100 w-full">
+      <div class="stat">
+        <div class="stat-title">Outstanding</div>
+        <div class="stat-value text-warning">${{ summary.outstanding | number }}</div>
+        <div class="stat-desc">Current</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Table (Simulating Chart Data) -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Monthly Breakdown</h2>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th class="text-right">Revenue</th>
+              <th class="text-right">Expense</th>
+              <th class="text-right">Net</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of monthlyData">
+              <td class="font-bold">{{ data.month }}</td>
+              <td class="text-right text-success">+${{ data.revenue | number }}</td>
+              <td class="text-right text-error">-${{ data.expense | number }}</td>
+              <td class="text-right font-bold">${{ data.revenue - data.expense | number }}</td>
+              <td>
+                <progress class="progress progress-primary w-20" [value]="((data.revenue - data.expense)/15000)*100" max="100"></progress>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

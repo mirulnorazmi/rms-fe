@@ -1,0 +1,58 @@
+<div class="p-6 max-w-2xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/admin/users">Users</a></li>
+      <li>Add/Edit User</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold mb-6">User Details</h2>
+      
+      <form (ngSubmit)="saveUser()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">First Name</span></label>
+            <input type="text" placeholder="John" class="input input-bordered w-full" [(ngModel)]="user.firstName" name="firstName" required />
+          </div>
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Last Name</span></label>
+            <input type="text" placeholder="Doe" class="input input-bordered w-full" [(ngModel)]="user.lastName" name="lastName" required />
+          </div>
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Email Address</span></label>
+          <input type="email" placeholder="john@example.com" class="input input-bordered w-full" [(ngModel)]="user.email" name="email" required />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="form-control w-full">
+            <label class="label"><span class="label-text">Role</span></label>
+            <select class="select select-bordered" [(ngModel)]="user.role" name="role">
+              <option>Tenant</option>
+              <option>Landlord</option>
+              <option>Admin</option>
+              <option>Technician</option>
+            </select>
+          </div>
+          <div class="form-control w-full">
+             <label class="label"><span class="label-text">Status</span></label>
+            <select class="select select-bordered" [(ngModel)]="user.status" name="status">
+              <option>Active</option>
+              <option>Inactive</option>
+              <option>Suspended</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end">
+          <button type="button" class="btn" routerLink="/admin/users">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

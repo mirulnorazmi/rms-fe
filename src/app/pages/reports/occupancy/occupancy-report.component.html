@@ -1,0 +1,79 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Occupancy Report</h1>
+
+  <!-- High Level Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="card bg-base-100 shadow-xl text-center">
+      <div class="card-body">
+        <div class="radial-progress text-primary text-2xl font-bold mx-auto" [style.--value]="stats.occupancyRate" role="progressbar">{{ stats.occupancyRate }}%</div>
+        <p class="mt-2">Overall Occupancy Rate</p>
+      </div>
+    </div>
+    
+    <div class="stats stats-vertical shadow bg-base-100">
+      <div class="stat">
+        <div class="stat-title">Total Units</div>
+        <div class="stat-value">{{ stats.totalUnits }}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Occupied</div>
+        <div class="stat-value text-success">{{ stats.occupied }}</div>
+      </div>
+    </div>
+
+     <div class="stats stats-vertical shadow bg-base-100">
+      <div class="stat">
+        <div class="stat-title">Vacant</div>
+        <div class="stat-value text-warning">{{ stats.vacant }}</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title">Under Maintenance</div>
+        <div class="stat-value text-error">{{ stats.maintenance }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Breakdown -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Occupancy by Property</h2>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>Property Name</th>
+              <th>Occupancy Rate</th>
+              <th>Occupied / Total</th>
+              <th>Vacant</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prop of properties">
+              <td class="font-bold">{{ prop.name }}</td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <progress class="progress w-24" [ngClass]="{
+                    'progress-success': prop.rate >= 90,
+                    'progress-warning': prop.rate < 90 && prop.rate >= 70,
+                    'progress-error': prop.rate < 70
+                  }" [value]="prop.rate" max="100"></progress>
+                  <span class="text-sm">{{ prop.rate }}%</span>
+                </div>
+              </td>
+              <td>{{ prop.occupied }} / {{ prop.total }}</td>
+              <td>{{ prop.vacant }}</td>
+              <td>
+                <div class="badge" [ngClass]="{
+                  'badge-success': prop.rate >= 90,
+                  'badge-warning': prop.rate < 90
+                }">{{ prop.rate >= 90 ? 'Healthy' : 'Attention Needed' }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

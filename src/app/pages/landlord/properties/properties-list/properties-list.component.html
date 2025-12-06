@@ -1,0 +1,42 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Properties</h1>
+    <a routerLink="add" class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Add Property
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let property of properties" class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+      <figure class="h-48 bg-gray-200 flex items-center justify-center">
+        <span class="text-6xl">🏠</span>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title flex justify-between">
+          {{ property.name }}
+          <div class="badge badge-secondary">{{ property.type }}</div>
+        </h2>
+        <p class="text-gray-500 text-sm">{{ property.address }}</p>
+        
+        <div class="stats stats-vertical lg:stats-horizontal shadow mt-4 w-full">
+          <div class="stat place-items-center p-2">
+            <div class="stat-title">Units</div>
+            <div class="stat-value text-lg">{{ property.units }}</div>
+          </div>
+          <div class="stat place-items-center p-2">
+            <div class="stat-title">Occupancy</div>
+            <div class="stat-value text-lg text-success">{{ property.occupancy }}</div>
+          </div>
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <a [routerLink]="[property.id, 'units']" class="btn btn-sm btn-outline">View Units</a>
+          <button class="btn btn-sm btn-primary">Manage</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="p-6 space-y-6">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/dashboard">Dashboard</a></li>
+      <li><a routerLink="/landlord/payments/overview">Payments</a></li>
+      <li>History</li>
+    </ul>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Payment History</h1>
+    <div class="flex gap-2">
+      <select class="select select-bordered select-sm">
+        <option disabled selected>Filter by Status</option>
+        <option>All</option>
+        <option>Paid</option>
+        <option>Pending</option>
+        <option>Overdue</option>
+      </select>
+      <button class="btn btn-sm btn-outline">Export CSV</button>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="overflow-x-auto">
+      <table class="table w-full">
+        <thead>
+          <tr>
+            <th>Invoice ID</th>
+            <th>Tenant</th>
+            <th>Unit</th>
+            <th>Date</th>
+            <th>Method</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of payments" class="hover">
+            <td class="font-mono text-xs">{{ payment.id }}</td>
+            <td class="font-medium">{{ payment.tenant }}</td>
+            <td>{{ payment.unit }}</td>
+            <td>{{ payment.date }}</td>
+            <td>{{ payment.method }}</td>
+            <td class="font-bold">{{ payment.amount | currency }}</td>
+            <td>
+              <div class="badge" [ngClass]="{
+                'badge-success': payment.status === 'Paid',
+                'badge-warning': payment.status === 'Pending',
+                'badge-error': payment.status === 'Overdue'
+              }">{{ payment.status }}</div>
+            </td>
+            <td>
+              <button class="btn btn-ghost btn-xs" *ngIf="payment.status === 'Paid'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Receipt
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

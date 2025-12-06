@@ -20,18 +20,42 @@ import { DocumentVaultComponent } from './pages/tenant/documents/document-vault/
 import { PropertyListComponent } from './pages/landlord/properties/property-list/property-list.component';
 import { PropertyDetailComponent } from './pages/landlord/properties/property-detail/property-detail.component';
 
+import { UnitFormComponent } from './pages/landlord/properties/unit-form/unit-form.component';
+import { PaymentOverviewComponent } from './pages/landlord/payments/payment-overview/payment-overview.component';
+import { PaymentHistoryComponent } from './pages/landlord/payments/payment-history/payment-history.component';
+import { PaymentAdjustmentComponent } from './pages/landlord/payments/payment-adjustment/payment-adjustment.component';
+import { SendReminderComponent } from './pages/landlord/payments/send-reminder/send-reminder.component';
+import { DocumentListComponent } from './pages/landlord/documents/document-list/document-list.component';
+import { DocumentViewerComponent } from './pages/landlord/documents/document-viewer/document-viewer.component';
+import { RegisterComponent } from './pages/register/register.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   
   // Landlord Routes
   { path: 'landlord/dashboard', component: LandlordDashboardComponent },
   { path: 'landlord/tenants', component: TenantManagementComponent },
   { path: 'landlord/maintenance', component: MaintenanceHubComponent },
   { path: 'landlord/reports', component: FinancialReportsComponent },
-  { path: 'landlord/contracts', component: SmartContractVaultComponent },
+  { path: 'landlord/contracts', component: SmartContractVaultComponent }, // Legacy/Placeholder
   { path: 'landlord/properties', component: PropertyListComponent },
+  { path: 'landlord/properties/units', component: UnitFormComponent },
+  { path: 'landlord/properties/units/add', component: UnitFormComponent },
+  { path: 'landlord/properties/units/:id', component: UnitFormComponent },
   { path: 'landlord/properties/:id', component: PropertyDetailComponent },
+  
+  // Landlord Payments Routes
+  { path: 'landlord/payments', redirectTo: 'landlord/payments/overview', pathMatch: 'full' },
+  { path: 'landlord/payments/overview', component: PaymentOverviewComponent },
+  { path: 'landlord/payments/history', component: PaymentHistoryComponent },
+  { path: 'landlord/payments/adjustments', component: PaymentAdjustmentComponent },
+  { path: 'landlord/payments/reminders', component: SendReminderComponent },
+
+  // Landlord Document Vault
+  { path: 'landlord/documents', component: DocumentListComponent },
+  { path: 'landlord/documents/:id', component: DocumentViewerComponent },
 
   // Tenant Routes
   { path: 'tenant/dashboard', component: TenantDashboardComponent },

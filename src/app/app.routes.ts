@@ -6,6 +6,9 @@ import { MaintenanceHubComponent } from './pages/landlord/maintenance/maintenanc
 import { FinancialReportsComponent } from './pages/landlord/reports/financial-reports.component';
 import { SmartContractVaultComponent } from './pages/landlord/documents/smart-contract-vault.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HistoryComponent } from './pages/tenant/payment/history/history.component';
+import { SummaryComponent } from './pages/tenant/payment/summary/summary.component';
+import { PayNowComponent } from './pages/tenant/payment/pay-now/pay-now.component';
 import { TenantDashboardComponent } from './pages/tenant/dashboard/tenant-dashboard.component';
 
 export const routes: Routes = [
@@ -22,5 +25,11 @@ export const routes: Routes = [
   // Tenant Routes
   { path: 'tenant/dashboard', component: TenantDashboardComponent },
   
+  // Tenant Payment Routes
+  { path: 'tenant/payment/summary', component: SummaryComponent },
+  { path: 'tenant/payment/history', component: HistoryComponent },
+  { path: 'tenant/payment/pay', component: PayNowComponent },
+  { path: 'tenant/payments', redirectTo: 'tenant/payment/summary', pathMatch: 'full' },
+
   { path: '**', component: NotFoundComponent },
 ];

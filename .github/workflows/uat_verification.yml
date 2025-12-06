@@ -1,0 +1,47 @@
+name: UAT VERIFICATION validation checking
+
+on:
+  push:
+    branches: [ "UAT_VERIFICATION" ]
+
+# Grant permission to create Pull Requests
+permissions:
+  contents: write
+  # pull-requests: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci # --legacy-peer-deps
+
+      - name: Run Unit Tests
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+
+      - name: Build Application
+        run: npm run build
+
+      # --- STEP: Create PR (UAT_VERIFICATION -> UAT) ---
+      # - name: Create Pull Request
+      #   if: success()
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     gh pr create \
+      #       --base UAT \
+      #       --head UAT_VERIFICATION \
+      #       --title "✅ Verification Passed: Merge to UAT" \
+      #       --body "Automated PR created after successful build and test validation on UAT_VERIFICATION branch." \
+      #       --label "ready-for-deployment" \
+      #       --reviewer "mirulnorazmi" \
+      #       --assign "mirulnorazmi" \
+      #       || echo "PR already exists or no changes to merge."

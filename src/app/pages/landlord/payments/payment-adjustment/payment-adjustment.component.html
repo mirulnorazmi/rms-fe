@@ -1,0 +1,81 @@
+<div class="p-6 space-y-6 max-w-4xl mx-auto">
+  <div class="text-sm breadcrumbs mb-4">
+    <ul>
+      <li><a routerLink="/landlord/payments/overview">Payments</a></li>
+      <li>Adjustments</li>
+    </ul>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Adjustment Form -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Add Adjustment</h2>
+        <form (ngSubmit)="applyAdjustment()">
+          <div class="form-control w-full mb-4">
+            <label class="label"><span class="label-text">Select Tenant</span></label>
+            <select class="select select-bordered w-full" [(ngModel)]="adjustment.tenantId" name="tenantId">
+              <option disabled selected value="">Choose Tenant</option>
+              <option value="1">John Doe (Unit 101)</option>
+              <option value="2">Jane Smith (Unit 205)</option>
+            </select>
+          </div>
+
+          <div class="form-control w-full mb-4">
+            <label class="label"><span class="label-text">Adjustment Type</span></label>
+            <select class="select select-bordered w-full" [(ngModel)]="adjustment.type" name="type">
+              <option disabled selected value="">Select Type</option>
+              <option value="Discount">Discount (Credit)</option>
+              <option value="Late Fee">Late Fee (Charge)</option>
+              <option value="Misc Fee">Miscellaneous Fee</option>
+            </select>
+          </div>
+
+          <div class="form-control w-full mb-4">
+            <label class="label"><span class="label-text">Amount ($)</span></label>
+            <input type="number" placeholder="0.00" class="input input-bordered w-full" [(ngModel)]="adjustment.amount" name="amount" />
+          </div>
+
+          <div class="form-control w-full mb-6">
+            <label class="label"><span class="label-text">Reason</span></label>
+            <textarea class="textarea textarea-bordered h-24" placeholder="Explain the adjustment..." [(ngModel)]="adjustment.reason" name="reason"></textarea>
+          </div>
+
+          <div class="card-actions justify-end">
+            <button type="submit" class="btn btn-primary">Apply Adjustment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Adjustment Logs -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Recent Adjustments</h2>
+        <div class="overflow-x-auto">
+          <table class="table w-full text-sm">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Tenant</th>
+                <th>Type</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let log of logs">
+                <td>{{ log.date }}</td>
+                <td>{{ log.tenant }}</td>
+                <td>{{ log.type }}</td>
+                <td class="font-bold" [ngClass]="log.amount < 0 ? 'text-success' : 'text-error'">
+                  {{ log.amount | currency }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

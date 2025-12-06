@@ -8,7 +8,7 @@
           <label class="label">
             <span class="label-text">Email or Phone</span>
           </label>
-          <input type="text" placeholder="email@example.com" class="input input-bordered" required />
+          <input type="text" placeholder="email@example.com" class="input input-bordered" />
         </div>
 
         <!-- OTP Section (Simplified for UI) -->
@@ -23,9 +23,17 @@
         </div>
 
         <div class="form-control mt-6">
-          <button class="btn btn-primary">Login</button>
+          <button class="btn btn-primary" type="button">Login</button>
         </div>
         
+        <!-- Demo Login Section -->
+        <div class="divider">Demo Login</div>
+        <div class="flex flex-col gap-2">
+            <button type="button" (click)="loginAs('landlord')" class="btn btn-outline btn-secondary">Login as Landlord</button>
+            <button type="button" (click)="loginAs('tenant')" class="btn btn-outline btn-accent">Login as Tenant</button>
+             <button type="button" (click)="loginAs('guest')" class="btn btn-ghost btn-sm">Continue as Guest</button>
+        </div>
+
         <div class="text-center mt-4">
           <span class="text-sm">Don't have an account? </span>
           <a routerLink="/register" class="link link-primary text-sm font-bold">Register</a>
@@ -34,4 +42,3 @@
     </div>
   </div>
 </div>
-

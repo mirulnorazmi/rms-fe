@@ -19,13 +19,38 @@ export class ReportIssueComponent {
   };
 
   isSubmitting = false;
+  showAiModal = false;
+  isAnalyzing = false;
 
-  submitIssue() {
+  aiResult = {
+    priority: 'High',
+    description: 'Based on the analysis of the uploaded images and details, this issue appears to be a severe plumbing failure potentially affecting building structure. Immediate attention is recommended.'
+  };
+
+  openAnalysisModal() {
+    this.showAiModal = true;
+    this.isAnalyzing = true;
+    
+    // Simulate AI analysis delay
+    setTimeout(() => {
+      this.isAnalyzing = false;
+      this.issue.priority = this.aiResult.priority;
+      this.issue.description = this.aiResult.description;
+    }, 2000);
+  }
+
+  closeModal() {
+    this.showAiModal = false;
+  }
+
+  confirmSubmission() {
     this.isSubmitting = true;
     // Simulate API call
     setTimeout(() => {
       this.isSubmitting = false;
+      this.showAiModal = false;
       // Handle success/redirect
+      console.log('Issue submitted:', this.issue);
     }, 1500);
   }
 }

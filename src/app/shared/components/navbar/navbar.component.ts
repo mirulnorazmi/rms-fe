@@ -32,9 +32,9 @@ export class NavbarComponent {
   menus = {
     landlord: [
       { id: 'dashboard', label: 'Dashboard', route: '/landlord/dashboard' },
-      { id: 'my-properties', label: 'My Properties', route: '/landlord/properties' },
-      { id: 'tenants', label: 'Tenants', route: '/landlord/tenants' },
-      { id: 'finance', label: 'Payments', route: '/landlord/payments' },
+      { id: 'tenants', label: 'My Tenants', route: '/landlord/tenants' },
+      { id: 'maintenance', label: 'Maintenance Hub', route: '/landlord/maintenance' },
+      { id: 'reports', label: 'Reports', route: '/landlord/reports' },
       { id: 'contracts', label: 'Contracts', route: '/landlord/contracts' }
     ],
     tenant: [

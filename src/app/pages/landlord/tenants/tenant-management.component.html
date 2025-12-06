@@ -1,0 +1,79 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-base-content">Tenant Management</h1>
+    <button class="btn btn-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      Add Tenant
+    </button>
+  </div>
+
+  <div class="overflow-x-auto bg-base-100 rounded-lg shadow">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Unit</th>
+          <th>Lease Period</th>
+          <th>Status</th>
+          <th>Payment Status</th>
+          <th>Risk Score</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tenant of tenants" class="hover">
+          <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar">
+                <div class="mask mask-squircle w-12 h-12">
+                  <img [src]="tenant.avatarUrl || 'https://img.daisyui.com/images/profile/demo/2@94.webp'" [alt]="tenant.name" />
+                </div>
+              </div>
+              <div>
+                <div class="font-bold">{{ tenant.name }}</div>
+                <div class="text-sm opacity-50">{{ tenant.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="font-medium">{{ tenant.unitId }}</td>
+          <td>
+            <div class="text-sm">{{ tenant.leaseStart | date }}</div>
+            <div class="text-xs opacity-50">to {{ tenant.leaseEnd | date }}</div>
+          </td>
+          <td>
+            <div class="badge badge-sm" [ngClass]="{
+              'badge-success': tenant.onboardingStatus === 'Active',
+              'badge-warning': tenant.onboardingStatus === 'Pending',
+              'badge-info': tenant.onboardingStatus === 'Completed'
+            }">{{ tenant.onboardingStatus }}</div>
+          </td>
+          <td>
+            <div class="badge badge-outline" [ngClass]="{
+              'badge-success': tenant.paymentStatus === 'On-time',
+              'badge-error': tenant.paymentStatus === 'Late',
+              'badge-warning': tenant.paymentStatus === 'Pending'
+            }">{{ tenant.paymentStatus }}</div>
+          </td>
+          <td>
+             <div class="radial-progress text-xs font-bold" 
+                  [ngClass]="{
+                    'text-success': tenant.riskScore < 30,
+                    'text-warning': tenant.riskScore >= 30 && tenant.riskScore < 70,
+                    'text-error': tenant.riskScore >= 70
+                  }"
+                  [style.--value]="tenant.riskScore" 
+                  style="--size:2rem;">
+               {{ tenant.riskScore }}
+             </div>
+          </td>
+          <td>
+            <button class="btn btn-ghost btn-xs">View Profile</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

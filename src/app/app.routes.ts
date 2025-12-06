@@ -27,10 +27,12 @@ import { PaymentAdjustmentComponent } from './pages/landlord/payments/payment-ad
 import { SendReminderComponent } from './pages/landlord/payments/send-reminder/send-reminder.component';
 import { DocumentListComponent } from './pages/landlord/documents/document-list/document-list.component';
 import { DocumentViewerComponent } from './pages/landlord/documents/document-viewer/document-viewer.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   
   // Landlord Routes
   { path: 'landlord/dashboard', component: LandlordDashboardComponent },

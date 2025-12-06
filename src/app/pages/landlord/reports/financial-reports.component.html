@@ -32,18 +32,18 @@
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-title mb-4">Key Metrics</h2>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4" *ngIf="reports.length > 0">
            <div class="stats shadow bg-base-200">
              <div class="stat">
                <div class="stat-title">Vacancy Rate</div>
-               <div class="stat-value text-primary">{{ reports[0]?.vacancyRate }}%</div>
+               <div class="stat-value text-primary">{{ reports[0].vacancyRate }}%</div>
                <div class="stat-desc">Target: < 5%</div>
              </div>
            </div>
            <div class="stats shadow bg-base-200">
              <div class="stat">
                <div class="stat-title">Collection Rate</div>
-               <div class="stat-value text-secondary">{{ reports[0]?.rentCollectionRate }}%</div>
+               <div class="stat-value text-secondary">{{ reports[0].rentCollectionRate }}%</div>
                <div class="stat-desc">Oct 2023</div>
              </div>
            </div>

@@ -40,8 +40,10 @@ export class NavbarComponent {
     tenant: [
       { id: 'dashboard', label: 'Dashboard', route: '/tenant/dashboard' },
       { id: 'payments', label: 'Payments', route: '/tenant/payments' },
-      { id: 'maintenance', label: 'Maintenance', route: '/tenant/maintenance/tickets' },
-      { id: 'contract', label: 'Contract', route: '/tenant/contract' }
+      { id: 'maintenance', label: 'Property', route: 'tenant/property/details' },
+      { id: 'contract', label: 'Contract', route: '/tenant/contract' },
+      { id: 'Maintenance', label: 'Maintenance', route: '/tenant/maintenance/tickets' },
+      { id: 'Documents', label: 'Documents', route: '/documents' }
     ],
     guest: [
       { id: 'login', label: 'Login', route: '/login' },

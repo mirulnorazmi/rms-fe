@@ -2,7 +2,7 @@ name: UAT VERIFICATION validation checking
 
 on:
   push:
-    branches: [ "UAT_VERIFICATION" ]
+    branches: [ "uat_verification" ]
 
 # Grant permission to create Pull Requests
 permissions:

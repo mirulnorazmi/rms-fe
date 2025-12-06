@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "UAT" ]
+    branches: [ "uat" ]
 
 jobs:
   build-and-test:

@@ -1,0 +1,122 @@
+<div class="p-6 space-y-6 max-w-6xl mx-auto">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <div class="text-sm breadcrumbs text-base-content/60 mb-1">
+        <ul>
+          <li><a routerLink="/tenant/dashboard">Dashboard</a></li>
+          <li>Contract Viewer</li>
+        </ul>
+      </div>
+      <h1 class="text-3xl font-bold text-base-content">{{ contract.title }}</h1>
+      <p class="text-base-content/60 mt-1">ID: <span class="font-mono">{{ contract.id }}</span> • Valid: {{ contract.startDate }} - {{ contract.endDate }}</p>
+    </div>
+    
+    <div class="flex gap-2">
+      <button class="btn btn-primary gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        Download PDF
+      </button>
+      <button class="btn btn-outline gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 9v7.5" />
+        </svg>
+        Schedule Renewal
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <!-- PDF Viewer Area -->
+    <div class="lg:col-span-2">
+      <div class="card bg-base-100 shadow-sm border border-base-200 h-[600px] flex flex-col">
+        <div class="bg-base-200/50 p-3 flex justify-between items-center border-b border-base-200 rounded-t-2xl">
+          <div class="flex gap-2">
+            <div class="w-3 h-3 rounded-full bg-error/50"></div>
+            <div class="w-3 h-3 rounded-full bg-warning/50"></div>
+            <div class="w-3 h-3 rounded-full bg-success/50"></div>
+          </div>
+          <span class="text-xs font-mono opacity-50">lease_agreement_v2.pdf</span>
+          <div class="w-8"></div>
+        </div>
+        
+        <!-- Mock PDF Content -->
+        <div class="flex-1 bg-base-100 p-8 overflow-y-auto relative">
+          <div class="max-w-2xl mx-auto space-y-6 opacity-70 select-none pointer-events-none">
+            <div class="h-8 bg-base-300 w-3/4 mb-8"></div>
+            <div class="space-y-2">
+              <div class="h-4 bg-base-200 w-full"></div>
+              <div class="h-4 bg-base-200 w-full"></div>
+              <div class="h-4 bg-base-200 w-5/6"></div>
+            </div>
+            <div class="space-y-2">
+              <div class="h-4 bg-base-200 w-full"></div>
+              <div class="h-4 bg-base-200 w-4/5"></div>
+            </div>
+            <div class="h-64 bg-base-200/50 w-full border-2 border-dashed border-base-300 flex items-center justify-center">
+              <span class="text-base-content/20 font-bold text-2xl">DOCUMENT PREVIEW</span>
+            </div>
+            <div class="space-y-2">
+               <div class="h-4 bg-base-200 w-full"></div>
+               <div class="h-4 bg-base-200 w-3/4"></div>
+            </div>
+          </div>
+          
+          <!-- "Verified" Stamp -->
+          <div class="absolute bottom-10 right-10 rotate-[-15deg] border-4 border-success text-success font-black text-4xl p-4 rounded opacity-30">
+            SIGNED & ACTIVE
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar: History & Timeline -->
+    <div class="space-y-6">
+      
+      <!-- Version History -->
+      <div class="card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body">
+          <h2 class="card-title text-base mb-4">Version History</h2>
+          <div class="space-y-4">
+            <div *ngFor="let v of versions" class="flex items-start gap-3 pb-4 border-b border-base-200 last:border-0 last:pb-0">
+              <div class="mt-1">
+                <div class="badge badge-sm" [ngClass]="{
+                  'badge-success': v.status === 'Active',
+                  'badge-ghost': v.status !== 'Active'
+                }">{{ v.version }}</div>
+              </div>
+              <div class="flex-1">
+                <div class="flex justify-between items-start">
+                  <p class="font-bold text-sm">{{ v.reason }}</p>
+                  <span class="text-xs text-base-content/50">{{ v.date }}</span>
+                </div>
+                <p class="text-xs text-base-content/60 mt-1">{{ v.status }}</p>
+                <button *ngIf="v.status !== 'Active'" class="btn btn-link btn-xs p-0 h-auto min-h-0 mt-1 text-primary no-underline hover:underline">View</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="card bg-base-100 shadow-sm border border-base-200">
+        <div class="card-body">
+          <h2 class="card-title text-base mb-4">Lease Timeline</h2>
+          <ul class="steps steps-vertical w-full">
+            <li *ngFor="let event of timeline" class="step" [ngClass]="{'step-primary': event.status === 'completed'}">
+              <div class="text-left w-full ml-2">
+                <p class="font-bold text-sm">{{ event.event }}</p>
+                <p class="text-xs opacity-60">{{ event.date }}</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -50,8 +50,8 @@ export const routes: Routes = [
   { path: 'tenant/maintenance', redirectTo: 'tenant/maintenance/tickets', pathMatch: 'full' },
 
   // Tenant Notifications & Documents
-  { path: 'notifications', component: NotificationsComponent },
-  { path: 'documents', component: DocumentVaultComponent },
+  { path: 'tenant/notifications', component: NotificationsComponent },
+  { path: 'tenant/documents', component: DocumentVaultComponent },
 
   { path: '**', component: NotFoundComponent },
 ];

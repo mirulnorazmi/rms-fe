@@ -21,15 +21,9 @@
     <!-- Left Column: Images & Details -->
     <div class="lg:col-span-2 space-y-6">
       
-      <!-- Hero Image Carousel -->
-      <div class="carousel w-full rounded-2xl shadow-sm border border-base-200 h-80">
-        <div *ngFor="let img of property.images; let i = index" [id]="'slide'+i" class="carousel-item relative w-full">
-          <img [src]="img" class="w-full object-cover" />
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a [href]="'#slide'+(i === 0 ? property.images.length-1 : i-1)" class="btn btn-circle btn-sm bg-base-100/80 border-none hover:bg-base-100">❮</a> 
-            <a [href]="'#slide'+(i === property.images.length-1 ? 0 : i+1)" class="btn btn-circle btn-sm bg-base-100/80 border-none hover:bg-base-100">❯</a>
-          </div>
-        </div>
+      <!-- Hero Image -->
+      <div class="w-full rounded-2xl shadow-sm border border-base-200 h-80 overflow-hidden">
+        <img [src]="property.images[0]" class="w-full h-full object-cover" />
       </div>
 
       <!-- Property Specs -->
@@ -140,7 +134,7 @@
       </div>
       
       <!-- Location Map Placeholder -->
-      <div class="card bg-base-100 shadow-sm border border-base-200 h-48 overflow-hidden relative">
+      <!-- <div class="card bg-base-100 shadow-sm border border-base-200 h-48 overflow-hidden relative">
         <div class="absolute inset-0 bg-base-200 flex items-center justify-center">
           <span class="text-base-content/40 flex flex-col items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
@@ -153,7 +147,7 @@
         <div class="absolute bottom-4 left-4 right-4 bg-base-100/90 backdrop-blur p-2 rounded-lg text-xs font-medium text-center shadow-sm">
           {{ property.address }}
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>

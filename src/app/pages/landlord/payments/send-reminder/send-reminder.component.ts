@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 export class SendReminderComponent {
   tenants = [
     { id: '1', name: 'Haris', unit: 'Unit 105', status: '5 Days Late' },
-    { id: '2', name: 'Zaid', unit: 'Unit 202', status: '5 Days Late' },
+    { id: '2', name: 'Zaidd', unit: 'Unit 202', status: '5 Days Late' },
     { id: '3', name: 'Charlie Green', unit: 'Unit 305', status: '2 Days Late' },
     { id: '4', name: 'David Black', unit: 'Unit 401', status: '1 Day Late' }
   ];

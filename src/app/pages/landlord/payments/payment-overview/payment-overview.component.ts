@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-payment-overview',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './payment-overview.component.html',
-  styles: []
+    selector: 'app-payment-overview',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './payment-overview.component.html',
+    styles: []
 })
 export class PaymentOverviewComponent {
   metrics = {

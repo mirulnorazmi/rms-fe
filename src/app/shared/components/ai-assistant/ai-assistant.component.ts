@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-ai-assistant',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './ai-assistant.component.html',
-  styles: []
+    selector: 'app-ai-assistant',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './ai-assistant.component.html',
+    styles: []
 })
 export class AIAssistantComponent {
   isOpen = false;

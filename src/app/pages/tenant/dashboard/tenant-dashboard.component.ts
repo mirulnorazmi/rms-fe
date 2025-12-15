@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-tenant-dashboard',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './tenant-dashboard.component.html',
-  styleUrls: ['./tenant-dashboard.component.css']
+    selector: 'app-tenant-dashboard',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './tenant-dashboard.component.html',
+    styleUrls: ['./tenant-dashboard.component.css']
 })
 export class TenantDashboardComponent {
   tenantName = 'Alice Smith';

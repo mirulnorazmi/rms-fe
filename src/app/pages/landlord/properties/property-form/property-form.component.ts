@@ -5,11 +5,10 @@ import { PropertyService } from '../../../../core/services/mock/property.service
 import { Property, PropertyType } from '../../../../core/models/property.model';
 
 @Component({
-  selector: 'app-property-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './property-form.component.html',
-  styles: []
+    selector: 'app-property-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './property-form.component.html',
+    styles: []
 })
 export class PropertyFormComponent implements OnInit {
   @Input() property: Property | null = null; // If provided, Edit Mode

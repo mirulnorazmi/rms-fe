@@ -5,11 +5,10 @@ import { AuthService } from '../../../core/services/auth.service';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, ThemeToggleComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+    selector: 'app-navbar',
+    imports: [CommonModule, RouterLink, RouterLinkActive, ThemeToggleComponent],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css'
 })
 // ... existing code ...
 

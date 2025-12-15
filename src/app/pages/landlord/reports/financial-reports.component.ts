@@ -4,11 +4,10 @@ import { FinancialReport, RentAdjustment } from '../../../core/models/financial-
 import { FinancialService } from '../../../core/services/mock/financial.service';
 
 @Component({
-  selector: 'app-financial-reports',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './financial-reports.component.html',
-  styles: []
+    selector: 'app-financial-reports',
+    imports: [CommonModule],
+    templateUrl: './financial-reports.component.html',
+    styles: []
 })
 export class FinancialReportsComponent implements OnInit {
   private financialService = inject(FinancialService);

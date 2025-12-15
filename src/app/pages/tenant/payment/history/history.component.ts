@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-history',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './history.component.html',
-  styleUrl: './history.component.css'
+    selector: 'app-history',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './history.component.html',
+    styleUrl: './history.component.css'
 })
 export class HistoryComponent {
   payments = [

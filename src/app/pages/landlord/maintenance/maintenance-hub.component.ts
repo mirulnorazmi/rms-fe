@@ -4,11 +4,10 @@ import { TicketService } from '../../../core/services/mock/ticket.service';
 import { MaintenanceTicket } from '../../../core/models/maintenance-ticket.model';
 
 @Component({
-  selector: 'app-maintenance-hub',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './maintenance-hub.component.html',
-  styles: []
+    selector: 'app-maintenance-hub',
+    imports: [CommonModule],
+    templateUrl: './maintenance-hub.component.html',
+    styles: []
 })
 export class MaintenanceHubComponent implements OnInit {
   private ticketService = inject(TicketService);

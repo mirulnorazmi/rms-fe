@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-payment-adjustment',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './payment-adjustment.component.html',
-  styles: []
+    selector: 'app-payment-adjustment',
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './payment-adjustment.component.html',
+    styles: []
 })
 export class PaymentAdjustmentComponent {
   adjustment = {

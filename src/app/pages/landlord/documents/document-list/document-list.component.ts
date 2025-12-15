@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-document-list',
-  standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './document-list.component.html',
-  styles: []
+    selector: 'app-document-list',
+    imports: [CommonModule, RouterLink, FormsModule],
+    templateUrl: './document-list.component.html',
+    styles: []
 })
 export class DocumentListComponent {
   documents = [

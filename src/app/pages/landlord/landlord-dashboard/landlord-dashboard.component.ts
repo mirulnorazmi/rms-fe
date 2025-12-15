@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-landlord-dashboard',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './landlord-dashboard.component.html',
-  styleUrls: ['./landlord-dashboard.component.css'],
+    selector: 'app-landlord-dashboard',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './landlord-dashboard.component.html',
+    styleUrls: ['./landlord-dashboard.component.css']
 })
 export class LandlordDashboardComponent {
   userRole = 'Landlord';

@@ -6,11 +6,10 @@ import { Property } from '../../../../core/models/property.model';
 import { PropertyFormComponent } from '../property-form/property-form.component';
 
 @Component({
-  selector: 'app-property-list',
-  standalone: true,
-  imports: [CommonModule, RouterLink, PropertyFormComponent],
-  templateUrl: './property-list.component.html',
-  styles: []
+    selector: 'app-property-list',
+    imports: [CommonModule, RouterLink, PropertyFormComponent],
+    templateUrl: './property-list.component.html',
+    styles: []
 })
 export class PropertyListComponent implements OnInit {
   private propertyService = inject(PropertyService);

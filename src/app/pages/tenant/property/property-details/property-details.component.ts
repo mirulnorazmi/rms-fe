@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-property-details',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './property-details.component.html',
-  styles: []
+    selector: 'app-property-details',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './property-details.component.html',
+    styles: []
 })
 export class PropertyDetailsComponent {
   property = {

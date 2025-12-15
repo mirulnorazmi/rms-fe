@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-pay-now',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './pay-now.component.html',
-  styleUrl: './pay-now.component.css'
+    selector: 'app-pay-now',
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './pay-now.component.html',
+    styleUrl: './pay-now.component.css'
 })
 export class PayNowComponent {
   amount = 1240;

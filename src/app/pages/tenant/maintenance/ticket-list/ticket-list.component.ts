@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-ticket-list',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './ticket-list.component.html',
-  styles: []
+    selector: 'app-ticket-list',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './ticket-list.component.html',
+    styles: []
 })
 export class TicketListComponent {
   stats = {

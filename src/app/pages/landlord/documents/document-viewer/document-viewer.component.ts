@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-document-viewer',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './document-viewer.component.html',
-  styles: []
+    selector: 'app-document-viewer',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './document-viewer.component.html',
+    styles: []
 })
 export class DocumentViewerComponent {
   document = {

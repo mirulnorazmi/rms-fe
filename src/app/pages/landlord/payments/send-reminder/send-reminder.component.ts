@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-send-reminder',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './send-reminder.component.html',
-  styles: []
+    selector: 'app-send-reminder',
+    imports: [CommonModule, FormsModule, RouterLink],
+    templateUrl: './send-reminder.component.html',
+    styles: []
 })
 export class SendReminderComponent {
   tenants = [
@@ -17,7 +16,6 @@ export class SendReminderComponent {
     { id: '3', name: 'Charlie Green', unit: 'Unit 305', status: '2 Days Late' },
     { id: '4', name: 'David Black', unit: 'Unit 401', status: '1 Day Late' }
   ];
-
   reminder = {
     selectedTenants: [] as string[],
     template: 'overdue',

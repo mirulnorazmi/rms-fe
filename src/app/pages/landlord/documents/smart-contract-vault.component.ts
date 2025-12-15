@@ -4,11 +4,10 @@ import { DocumentService } from '../../../core/services/mock/document.service';
 import { Document } from '../../../core/models/document.model';
 
 @Component({
-  selector: 'app-smart-contract-vault',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './smart-contract-vault.component.html',
-  styles: []
+    selector: 'app-smart-contract-vault',
+    imports: [CommonModule],
+    templateUrl: './smart-contract-vault.component.html',
+    styles: []
 })
 export class SmartContractVaultComponent implements OnInit {
   private documentService = inject(DocumentService);

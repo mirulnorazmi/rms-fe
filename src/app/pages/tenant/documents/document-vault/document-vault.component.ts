@@ -12,11 +12,10 @@ interface DocFile {
 }
 
 @Component({
-  selector: 'app-document-vault',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './document-vault.component.html',
-  styles: []
+    selector: 'app-document-vault',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './document-vault.component.html',
+    styles: []
 })
 export class DocumentVaultComponent {
   files: DocFile[] = [

@@ -13,11 +13,10 @@ interface Notification {
 }
 
 @Component({
-  selector: 'app-notifications',
-  standalone: true,
-  imports: [CommonModule, RouterLink],
-  templateUrl: './notifications.component.html',
-  styles: []
+    selector: 'app-notifications',
+    imports: [CommonModule, RouterLink],
+    templateUrl: './notifications.component.html',
+    styles: []
 })
 export class NotificationsComponent {
   notifications: Notification[] = [

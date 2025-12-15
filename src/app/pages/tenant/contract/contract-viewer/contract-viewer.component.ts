@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-contract-viewer',
-  standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './contract-viewer.component.html',
-  styles: []
+    selector: 'app-contract-viewer',
+    imports: [CommonModule, RouterLink, FormsModule],
+    templateUrl: './contract-viewer.component.html',
+    styles: []
 })
 export class ContractViewerComponent {
   contract = {

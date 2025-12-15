@@ -4,11 +4,10 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-report-issue',
-  standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
-  templateUrl: './report-issue.component.html',
-  styles: []
+    selector: 'app-report-issue',
+    imports: [CommonModule, RouterLink, FormsModule],
+    templateUrl: './report-issue.component.html',
+    styles: []
 })
 export class ReportIssueComponent {
   issue = {

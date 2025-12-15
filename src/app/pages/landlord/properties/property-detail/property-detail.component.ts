@@ -7,11 +7,10 @@ import { PropertyFormComponent } from '../property-form/property-form.component'
 import { UnitFormComponent } from '../unit-form/unit-form.component';
 
 @Component({
-  selector: 'app-property-detail',
-  standalone: true,
-  imports: [CommonModule, RouterLink, PropertyFormComponent, UnitFormComponent],
-  templateUrl: './property-detail.component.html',
-  styles: []
+    selector: 'app-property-detail',
+    imports: [CommonModule, RouterLink, PropertyFormComponent, UnitFormComponent],
+    templateUrl: './property-detail.component.html',
+    styles: []
 })
 export class PropertyDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);

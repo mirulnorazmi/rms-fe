@@ -5,11 +5,10 @@ import { Unit, UnitType, UnitStatus } from '../../../../core/models/property.mod
 import { PropertyService } from '../../../../core/services/mock/property.service';
 
 @Component({
-  selector: 'app-unit-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './unit-form.component.html',
-  styles: []
+    selector: 'app-unit-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './unit-form.component.html',
+    styles: []
 })
 export class UnitFormComponent implements OnInit {
   @Input() propertyId!: string;

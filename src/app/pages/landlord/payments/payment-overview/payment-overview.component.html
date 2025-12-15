@@ -53,12 +53,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let payment of latestPayments">
-                <td class="font-medium">{{ payment.tenant }}</td>
-                <td>{{ payment.unit }}</td>
-                <td class="text-success font-bold">+{{ payment.amount | currency }}</td>
-                <td class="text-sm">{{ payment.date }}</td>
-              </tr>
+              @for (payment of latestPayments; track payment) {
+                <tr>
+                  <td class="font-medium">{{ payment.tenant }}</td>
+                  <td>{{ payment.unit }}</td>
+                  <td class="text-success font-bold">+{{ payment.amount | currency }}</td>
+                  <td class="text-sm">{{ payment.date }}</td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>
@@ -81,15 +83,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let due of overdueList">
-                <td class="font-medium">{{ due.tenant }} <span class="text-xs opacity-50">({{ due.unit }})</span></td>
-                <td>{{ due.dueDate }}</td>
-                <td class="font-bold">{{ due.amount | currency }}</td>
-                <td class="text-error font-bold">{{ due.daysLate }} days</td>
-                <td>
-                  <button class="btn btn-xs btn-outline btn-error" routerLink="/landlord/payments/reminders">Remind</button>
-                </td>
-              </tr>
+              @for (due of overdueList; track due) {
+                <tr>
+                  <td class="font-medium">{{ due.tenant }} <span class="text-xs opacity-50">({{ due.unit }})</span></td>
+                  <td>{{ due.dueDate }}</td>
+                  <td class="font-bold">{{ due.amount | currency }}</td>
+                  <td class="text-error font-bold">{{ due.daysLate }} days</td>
+                  <td>
+                    <button class="btn btn-xs btn-outline btn-error" routerLink="/landlord/payments/reminders">Remind</button>
+                  </td>
+                </tr>
+              }
             </tbody>
           </table>
         </div>

@@ -10,9 +10,9 @@
   <div class="card bg-base-100 shadow-xl border border-base-200">
     <div class="card-body">
       <h1 class="card-title text-2xl mb-6">Report a Maintenance Issue</h1>
-      
+
       <form (ngSubmit)="openAnalysisModal()" class="space-y-6">
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="form-control w-full">
             <label class="label">
@@ -60,46 +60,51 @@
 <!-- AI Analysis Modal -->
 <div class="modal" [class.modal-open]="showAiModal">
   <div class="modal-box relative">
-    <button class="btn btn-sm btn-circle absolute right-2 top-2" (click)="closeModal()" *ngIf="!isSubmitting">✕</button>
-    
-    <div *ngIf="isAnalyzing" class="flex flex-col items-center justify-center py-10 space-y-4">
-      <span class="loading loading-spinner loading-lg text-primary"></span>
-      <h3 class="font-bold text-lg">AI is analyzing your report...</h3>
-      <p class="text-base-content/70">Identifying issue severity and generating description</p>
-    </div>
+    @if (!isSubmitting) {
+      <button class="btn btn-sm btn-circle absolute right-2 top-2" (click)="closeModal()">✕</button>
+    }
 
-    <div *ngIf="!isAnalyzing" class="space-y-6">
-      <h3 class="font-bold text-lg text-primary flex items-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-        </svg>
-        AI Analysis Complete
-      </h3>
+    @if (isAnalyzing) {
+      <div class="flex flex-col items-center justify-center py-10 space-y-4">
+        <span class="loading loading-spinner loading-lg text-primary"></span>
+        <h3 class="font-bold text-lg">AI is analyzing your report...</h3>
+        <p class="text-base-content/70">Identifying issue severity and generating description</p>
+      </div>
+    }
 
-      <div class="alert alert-info bg-primary/10 border-primary/20">
-        <div>
-          <h4 class="font-bold text-sm mb-1">Detected Priority Level</h4>
-          <div class="badge badge-error font-bold">{{issue.priority}}</div>
+    @if (!isAnalyzing) {
+      <div class="space-y-6">
+        <h3 class="font-bold text-lg text-primary flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+          </svg>
+          AI Analysis Complete
+        </h3>
+        <div class="alert alert-info bg-primary/10 border-primary/20">
+          <div>
+            <h4 class="font-bold text-sm mb-1">Detected Priority Level</h4>
+            <div class="badge badge-error font-bold">{{issue.priority}}</div>
+          </div>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-medium">Generated Description</span>
+          </label>
+          <textarea class="textarea textarea-bordered h-32 w-full" [(ngModel)]="issue.description" name="description"></textarea>
+          <label class="label">
+            <span class="label-text-alt text-base-content/60">You can edit this description before submitting.</span>
+          </label>
+        </div>
+        <div class="modal-action">
+          <button class="btn btn-ghost" (click)="closeModal()">Cancel</button>
+          <button class="btn btn-primary" (click)="confirmSubmission()" [disabled]="isSubmitting">
+            @if (isSubmitting) {
+              <span class="loading loading-spinner"></span>
+            }
+            Confirm & Send
+          </button>
         </div>
       </div>
-
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text font-medium">Generated Description</span>
-        </label>
-        <textarea class="textarea textarea-bordered h-32 w-full" [(ngModel)]="issue.description" name="description"></textarea>
-        <label class="label">
-          <span class="label-text-alt text-base-content/60">You can edit this description before submitting.</span>
-        </label>
-      </div>
-
-      <div class="modal-action">
-        <button class="btn btn-ghost" (click)="closeModal()">Cancel</button>
-        <button class="btn btn-primary" (click)="confirmSubmission()" [disabled]="isSubmitting">
-          <span *ngIf="isSubmitting" class="loading loading-spinner"></span>
-          Confirm & Send
-        </button>
-      </div>
-    </div>
+    }
   </div>
 </div>

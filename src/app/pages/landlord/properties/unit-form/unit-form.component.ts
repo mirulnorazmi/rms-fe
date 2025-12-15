@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Unit, UnitType, UnitStatus } from '../../../../core/models/property.model';
 import { PropertyService } from '../../../../core/services/mock/property.service';
 
 @Component({
     selector: 'app-unit-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './unit-form.component.html',
     styles: []
 })

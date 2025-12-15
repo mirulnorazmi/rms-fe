@@ -11,7 +11,7 @@
       <h1 class="text-3xl font-bold text-base-content">Maintenance Center</h1>
       <p class="text-base-content/60 mt-1">Report issues and track repair status.</p>
     </div>
-    
+
     <button class="btn btn-primary gap-2" routerLink="/tenant/maintenance/report">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -30,7 +30,7 @@
       <div class="stat-value text-warning">{{ stats.open }}</div>
       <div class="stat-desc">Requires attention</div>
     </div>
-    
+
     <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
       <div class="stat-figure text-info">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.014a2.5 2.5 0 011.541 1.541c.174.58.15 1.193-.014 1.743M16.5 19.85l-1.5-1.5M16.75 22.5l-1.75-1.75" /></svg>
@@ -39,7 +39,7 @@
       <div class="stat-value text-info">{{ stats.inProgress }}</div>
       <div class="stat-desc">Technician assigned</div>
     </div>
-    
+
     <div class="stat bg-base-100 shadow-sm border border-base-200 rounded-2xl">
       <div class="stat-figure text-success">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -66,35 +66,37 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of tickets" class="hover:bg-base-200/30 transition-colors">
-              <td>
-                <div class="font-bold">{{ ticket.title }}</div>
-                <div class="text-xs text-base-content/50 font-mono">{{ ticket.id }}</div>
-              </td>
-              <td>{{ ticket.category }}</td>
-              <td>
-                <div class="badge badge-sm gap-2 text-xs" [ngClass]="getStatusColor(ticket.status)">
-                  {{ ticket.status }}
-                </div>
-              </td>
-              <td>
+            @for (ticket of tickets; track ticket) {
+              <tr class="hover:bg-base-200/30 transition-colors">
+                <td>
+                  <div class="font-bold">{{ ticket.title }}</div>
+                  <div class="text-xs text-base-content/50 font-mono">{{ ticket.id }}</div>
+                </td>
+                <td>{{ ticket.category }}</td>
+                <td>
+                  <div class="badge badge-sm gap-2 text-xs" [ngClass]="getStatusColor(ticket.status)">
+                    {{ ticket.status }}
+                  </div>
+                </td>
+                <td>
                 <div class="flex items-center gap-1 text-xs font-medium" [ngClass]="{
                   'text-error': ticket.priority === 'High',
                   'text-warning': ticket.priority === 'Medium',
                   'text-success': ticket.priority === 'Low'
                 }">
-                  <div class="w-2 h-2 rounded-full bg-current"></div>
-                  {{ ticket.priority }}
-                </div>
-              </td>
-              <td>
-                <div class="text-sm">{{ ticket.date }}</div>
-                <div class="text-xs text-base-content/50">Upd: {{ ticket.lastUpdate }}</div>
-              </td>
-              <td>
-                <button class="btn btn-ghost btn-sm" [routerLink]="['/tenant/maintenance/tickets', ticket.id]">View Details</button>
-              </td>
-            </tr>
+                    <div class="w-2 h-2 rounded-full bg-current"></div>
+                    {{ ticket.priority }}
+                  </div>
+                </td>
+                <td>
+                  <div class="text-sm">{{ ticket.date }}</div>
+                  <div class="text-xs text-base-content/50">Upd: {{ ticket.lastUpdate }}</div>
+                </td>
+                <td>
+                  <button class="btn btn-ghost btn-sm" [routerLink]="['/tenant/maintenance/tickets', ticket.id]">View Details</button>
+                </td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>

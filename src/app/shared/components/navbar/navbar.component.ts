@@ -1,12 +1,12 @@
 import { Component, inject, Output, EventEmitter, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemeToggleComponent } from '../theme-toggle/theme-toggle.component';
 
 @Component({
     selector: 'app-navbar',
-    imports: [CommonModule, RouterLink, RouterLinkActive, ThemeToggleComponent],
+    imports: [RouterLink, RouterLinkActive, ThemeToggleComponent],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })

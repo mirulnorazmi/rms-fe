@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PropertyService } from '../../../../core/services/mock/property.service';
 import { Property, PropertyType } from '../../../../core/models/property.model';
 
 @Component({
     selector: 'app-property-form',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './property-form.component.html',
     styles: []
 })

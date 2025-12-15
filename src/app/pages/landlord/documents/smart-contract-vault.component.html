@@ -1,10 +1,10 @@
 <div class="p-6 relative">
   <div class="flex justify-between items-center mb-6">
     <div>
-       <h1 class="text-2xl font-bold text-base-content">Smart Contract Vault</h1>
-       <p class="text-sm text-base-content/60">Manage, version, and secure your lease agreements.</p>
+      <h1 class="text-2xl font-bold text-base-content">Smart Contract Vault</h1>
+      <p class="text-sm text-base-content/60">Manage, version, and secure your lease agreements.</p>
     </div>
-    
+
     <button class="btn btn-secondary gap-2" (click)="openAIModal()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
@@ -14,65 +14,68 @@
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let doc of documents" class="card bg-base-100 shadow hover:shadow-md transition-shadow">
-      <div class="card-body">
-        <div class="flex justify-between items-start">
+    @for (doc of documents; track doc) {
+      <div class="card bg-base-100 shadow hover:shadow-md transition-shadow">
+        <div class="card-body">
+          <div class="flex justify-between items-start">
            <div class="badge" [ngClass]="{
              'badge-primary': doc.type === 'Lease',
              'badge-ghost': doc.type !== 'Lease'
            }">{{ doc.type }}</div>
-           <div class="flex items-center gap-1 text-xs text-base-content/50" *ngIf="doc.encryptionStatus === 'Encrypted'">
-             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3">
-               <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-             </svg>
-             Encrypted
-           </div>
-        </div>
-        
-        <h3 class="card-title text-lg mt-2">{{ doc.title }}</h3>
-        
-        <div class="flex items-center gap-2 mt-1 mb-4">
-          <span class="badge badge-sm badge-outline">{{ doc.version }}</span>
-          <span class="text-xs text-base-content/60">Modified: {{ doc.modifiedDate | date }}</span>
-        </div>
-
-        <div class="card-actions justify-end items-center mt-auto">
-           <div *ngIf="doc.aiGenerated" class="mr-auto flex items-center gap-1 text-xs text-secondary">
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-             </svg>
-             AI Drafted
-           </div>
-           <button class="btn btn-sm btn-ghost">View</button>
-           <button class="btn btn-sm btn-primary btn-outline">Sign</button>
+            @if (doc.encryptionStatus === 'Encrypted') {
+              <div class="flex items-center gap-1 text-xs text-base-content/50">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3">
+                  <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+                </svg>
+                Encrypted
+              </div>
+            }
+          </div>
+          <h3 class="card-title text-lg mt-2">{{ doc.title }}</h3>
+          <div class="flex items-center gap-2 mt-1 mb-4">
+            <span class="badge badge-sm badge-outline">{{ doc.version }}</span>
+            <span class="text-xs text-base-content/60">Modified: {{ doc.modifiedDate | date }}</span>
+          </div>
+          <div class="card-actions justify-end items-center mt-auto">
+            @if (doc.aiGenerated) {
+              <div class="mr-auto flex items-center gap-1 text-xs text-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                </svg>
+                AI Drafted
+              </div>
+            }
+            <button class="btn btn-sm btn-ghost">View</button>
+            <button class="btn btn-sm btn-primary btn-outline">Sign</button>
+          </div>
         </div>
       </div>
-    </div>
+    }
   </div>
 </div>
 
 <!-- AI Generation Modal -->
-<div class="modal modal-open" *ngIf="showAIModal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-secondary">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
-      </svg>
-      AI Contract Generator
-    </h3>
-    <p class="py-4 text-sm text-base-content/70">Describe the lease terms, and our AI will draft a legally sound contract for you.</p>
-    
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Contract Terms & Conditions</span>
-      </label>
-      <textarea class="textarea textarea-bordered h-24" placeholder="E.g., 12-month lease for Unit 304, monthly rent $1500, no pets allowed, security deposit $2000..."></textarea>
-    </div>
-
-    <div class="modal-action">
-      <button class="btn" (click)="closeAIModal()">Cancel</button>
-      <button class="btn btn-secondary" (click)="closeAIModal()">Generate Draft</button>
+@if (showAIModal) {
+  <div class="modal modal-open">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-secondary">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+        </svg>
+        AI Contract Generator
+      </h3>
+      <p class="py-4 text-sm text-base-content/70">Describe the lease terms, and our AI will draft a legally sound contract for you.</p>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Contract Terms & Conditions</span>
+        </label>
+        <textarea class="textarea textarea-bordered h-24" placeholder="E.g., 12-month lease for Unit 304, monthly rent $1500, no pets allowed, security deposit $2000..."></textarea>
+      </div>
+      <div class="modal-action">
+        <button class="btn" (click)="closeAIModal()">Cancel</button>
+        <button class="btn btn-secondary" (click)="closeAIModal()">Generate Draft</button>
+      </div>
     </div>
   </div>
-</div>
+}
 

@@ -37,29 +37,33 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let payment of payments" class="hover">
-            <td class="font-mono text-xs">{{ payment.id }}</td>
-            <td class="font-medium">{{ payment.tenant }}</td>
-            <td>{{ payment.unit }}</td>
-            <td>{{ payment.date }}</td>
-            <td>{{ payment.method }}</td>
-            <td class="font-bold">{{ payment.amount | currency }}</td>
-            <td>
+          @for (payment of payments; track payment) {
+            <tr class="hover">
+              <td class="font-mono text-xs">{{ payment.id }}</td>
+              <td class="font-medium">{{ payment.tenant }}</td>
+              <td>{{ payment.unit }}</td>
+              <td>{{ payment.date }}</td>
+              <td>{{ payment.method }}</td>
+              <td class="font-bold">{{ payment.amount | currency }}</td>
+              <td>
               <div class="badge" [ngClass]="{
                 'badge-success': payment.status === 'Paid',
                 'badge-warning': payment.status === 'Pending',
                 'badge-error': payment.status === 'Overdue'
               }">{{ payment.status }}</div>
-            </td>
-            <td>
-              <button class="btn btn-ghost btn-xs" *ngIf="payment.status === 'Paid'">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
-                Receipt
-              </button>
-            </td>
-          </tr>
+              </td>
+              <td>
+                @if (payment.status === 'Paid') {
+                  <button class="btn btn-ghost btn-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
+                    Receipt
+                  </button>
+                }
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

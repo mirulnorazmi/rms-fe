@@ -14,40 +14,42 @@
         <div class="card-body">
           <div class="flex justify-between items-start">
             <div>
-               <h1 class="text-2xl font-bold mb-2">{{ ticket.title }}</h1>
-               <div class="flex gap-2">
-                 <div class="badge badge-info gap-1">
-                   {{ ticket.status }}
-                 </div>
-                 <div class="badge badge-ghost">{{ ticket.category }}</div>
-               </div>
+              <h1 class="text-2xl font-bold mb-2">{{ ticket.title }}</h1>
+              <div class="flex gap-2">
+                <div class="badge badge-info gap-1">
+                  {{ ticket.status }}
+                </div>
+                <div class="badge badge-ghost">{{ ticket.category }}</div>
+              </div>
             </div>
             <div class="text-right">
               <p class="text-xs font-mono text-base-content/50">{{ ticket.id }}</p>
               <p class="text-sm text-base-content/70">{{ ticket.created }}</p>
             </div>
           </div>
-          
+
           <div class="divider"></div>
-          
+
           <h3 class="font-bold text-sm uppercase text-base-content/50">Description</h3>
           <p class="mt-2">{{ ticket.description }}</p>
-          
+
           <div class="divider"></div>
-          
+
           <h3 class="font-bold text-sm uppercase text-base-content/50 mb-4">Timeline</h3>
           <ul class="timeline timeline-vertical timeline-compact timeline-snap-icon w-full">
-            <li *ngFor="let update of ticket.updates">
-              <div class="timeline-middle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-              </div>
-              <div class="timeline-end mb-10">
-                <time class="font-mono italic text-xs opacity-50">{{ update.date }}</time>
-                <div class="text-sm font-black">{{ update.author }}</div>
-                {{ update.text }}
-              </div>
-              <hr class="bg-primary"/>
-            </li>
+            @for (update of ticket.updates; track update) {
+              <li>
+                <div class="timeline-middle">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-primary"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                </div>
+                <div class="timeline-end mb-10">
+                  <time class="font-mono italic text-xs opacity-50">{{ update.date }}</time>
+                  <div class="text-sm font-black">{{ update.author }}</div>
+                  {{ update.text }}
+                </div>
+                <hr class="bg-primary"/>
+              </li>
+            }
           </ul>
         </div>
       </div>

@@ -6,7 +6,7 @@
       <p class="text-base-content/60 mt-1">Here's what's happening with your rental today.</p>
     </div>
     <div class="indicator">
-      <span class="indicator-item badge badge-secondary">{{ notifications.length }}</span> 
+      <span class="indicator-item badge badge-secondary">{{ notifications.length }}</span>
       <button class="btn btn-ghost btn-circle" routerLink="/tenant/notifications">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
       </button>
@@ -15,10 +15,10 @@
 
   <!-- Main Grid -->
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    
+
     <!-- Left Column (Payment & Property) -->
     <div class="lg:col-span-2 space-y-6">
-      
+
       <!-- 2. Payment Overview -->
       <div class="card bg-base-100 shadow-sm border border-base-200">
         <div class="card-body">
@@ -30,7 +30,7 @@
               'badge-error': rentStatus.status === 'Overdue'
             }">{{ rentStatus.status }}</div>
           </div>
-          
+
           <div class="flex items-center gap-4 mt-4">
             <div class="stat-value text-primary">${{ rentStatus.amount }}</div>
             <div class="text-sm text-base-content/60">
@@ -41,9 +41,11 @@
           <div class="mt-6">
             <h3 class="text-sm font-bold mb-2 text-base-content/70">Recent History</h3>
             <div class="flex gap-2">
-              <div *ngFor="let hist of rentStatus.history" class="badge badge-outline gap-2">
-                {{ hist.month }} <div class="w-2 h-2 rounded-full bg-success"></div>
-              </div>
+              @for (hist of rentStatus.history; track hist) {
+                <div class="badge badge-outline gap-2">
+                  {{ hist.month }} <div class="w-2 h-2 rounded-full bg-success"></div>
+                </div>
+              }
             </div>
           </div>
 
@@ -88,17 +90,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ticket of recentTickets">
-                  <td class="font-medium">{{ ticket.title }} <span class="text-xs opacity-50">#{{ ticket.id }}</span></td>
-                  <td>{{ ticket.date }}</td>
-                  <td>
+                @for (ticket of recentTickets; track ticket) {
+                  <tr>
+                    <td class="font-medium">{{ ticket.title }} <span class="text-xs opacity-50">#{{ ticket.id }}</span></td>
+                    <td>{{ ticket.date }}</td>
+                    <td>
                     <span class="badge badge-sm" [ngClass]="{
                       'badge-warning': ticket.status === 'Open',
                       'badge-info': ticket.status === 'In Progress'
                     }">{{ ticket.status }}</span>
-                  </td>
-                  <td><button class="btn btn-ghost btn-xs" [routerLink]="['/tenant/maintenance/tickets', ticket.id]">View</button></td>
-                </tr>
+                    </td>
+                    <td><button class="btn btn-ghost btn-xs" [routerLink]="['/tenant/maintenance/tickets', ticket.id]">View</button></td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -109,7 +113,7 @@
 
     <!-- Right Column (Stats, Docs, Reminders) -->
     <div class="space-y-6">
-      
+
       <!-- 3. Property & Contract -->
       <div class="card bg-base-100 shadow-sm border border-base-200">
         <div class="card-body p-5">
@@ -125,7 +129,7 @@
               <div class="text-xs opacity-70">{{ propertyDetails.address }}</div>
             </div>
           </div>
-          
+
           <div class="text-sm space-y-2 bg-base-200/50 p-3 rounded-lg">
             <div class="flex justify-between">
               <span class="opacity-70">Lease Ends:</span>
@@ -136,7 +140,7 @@
               <span class="font-medium text-warning">{{ propertyDetails.renewalDate }}</span>
             </div>
           </div>
-          
+
           <div class="card-actions mt-2">
             <button class="btn btn-block btn-outline btn-sm" routerLink="/tenant/contract">View Lease</button>
           </div>
@@ -145,61 +149,65 @@
 
       <!-- 5. Notifications -->
       <div class="space-y-2">
-        <div *ngFor="let notif of notifications" class="alert shadow-sm" [ngClass]="notif.type">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span class="text-sm">{{ notif.message }}</span>
-        </div>
+        @for (notif of notifications; track notif) {
+          <div class="alert shadow-sm" [ngClass]="notif.type">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="text-sm">{{ notif.message }}</span>
+          </div>
+        }
       </div>
 
       <!-- 7. AI Insights -->
       <!-- <div class="card bg-linear-to-br from-indigo-500 to-purple-600 text-white shadow-xl">
-        <div class="card-body p-5">
-          <h2 class="card-title text-sm opacity-90 flex gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-            Tenant Score
-          </h2>
-          <div class="flex items-center gap-4">
-            <div class="radial-progress bg-white/20 text-white border-4 border-transparent" [style.--value]="aiInsights.score" role="progressbar">{{ aiInsights.score }}</div>
-            <div class="text-xs opacity-80">Great job! You are a top-rated tenant.</div>
-          </div>
+      <div class="card-body p-5">
+        <h2 class="card-title text-sm opacity-90 flex gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+          Tenant Score
+        </h2>
+        <div class="flex items-center gap-4">
+          <div class="radial-progress bg-white/20 text-white border-4 border-transparent" [style.--value]="aiInsights.score" role="progressbar">{{ aiInsights.score }}</div>
+          <div class="text-xs opacity-80">Great job! You are a top-rated tenant.</div>
         </div>
-      </div> -->
+      </div>
+    </div> -->
 
-      <!-- 6. Document Vault Shortcut -->
-      <div class="card bg-base-100 shadow-sm border border-base-200">
-        <div class="card-body p-4">
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="font-bold text-sm">Recent Documents</h3>
-            <button class="btn btn-xs btn-ghost" routerLink="/documents">All Files</button>
-          </div>
-          <ul class="menu bg-base-200/50 rounded-box p-2 text-sm">
-            <li *ngFor="let doc of documents">
+    <!-- 6. Document Vault Shortcut -->
+    <div class="card bg-base-100 shadow-sm border border-base-200">
+      <div class="card-body p-4">
+        <div class="flex justify-between items-center mb-2">
+          <h3 class="font-bold text-sm">Recent Documents</h3>
+          <button class="btn btn-xs btn-ghost" routerLink="/documents">All Files</button>
+        </div>
+        <ul class="menu bg-base-200/50 rounded-box p-2 text-sm">
+          @for (doc of documents; track doc) {
+            <li>
               <a class="flex justify-between">
                 <span class="truncate max-w-[150px]">{{ doc.name }}</span>
                 <span class="opacity-50 text-xs">{{ doc.date }}</span>
               </a>
             </li>
-          </ul>
-          <button class="btn btn-sm btn-outline mt-2 w-full">Upload New</button>
-        </div>
+          }
+        </ul>
+        <button class="btn btn-sm btn-outline mt-2 w-full">Upload New</button>
       </div>
-
     </div>
-  </div>
 
-  <!-- 8. Quick Actions (Bottom Bar for Mobile, or just extra) -->
-  <div class="btm-nav lg:hidden z-40">
-    <button class="text-primary active" routerLink="/tenant/dashboard">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-      <span class="btm-nav-label text-xs">Home</span>
-    </button>
-    <button routerLink="/tenant/payments">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-      <span class="btm-nav-label text-xs">Pay</span>
-    </button>
-    <button routerLink="/tenant/maintenance/report">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-      <span class="btm-nav-label text-xs">Fix</span>
-    </button>
   </div>
+</div>
+
+<!-- 8. Quick Actions (Bottom Bar for Mobile, or just extra) -->
+<div class="btm-nav lg:hidden z-40">
+  <button class="text-primary active" routerLink="/tenant/dashboard">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+    <span class="btm-nav-label text-xs">Home</span>
+  </button>
+  <button routerLink="/tenant/payments">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span class="btm-nav-label text-xs">Pay</span>
+  </button>
+  <button routerLink="/tenant/maintenance/report">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+    <span class="btm-nav-label text-xs">Fix</span>
+  </button>
+</div>
 </div>

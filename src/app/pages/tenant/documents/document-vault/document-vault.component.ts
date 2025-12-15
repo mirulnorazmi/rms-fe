@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 
 interface DocFile {
@@ -13,7 +13,7 @@ interface DocFile {
 
 @Component({
     selector: 'app-document-vault',
-    imports: [CommonModule, RouterLink],
+    imports: [RouterLink],
     templateUrl: './document-vault.component.html',
     styles: []
 })

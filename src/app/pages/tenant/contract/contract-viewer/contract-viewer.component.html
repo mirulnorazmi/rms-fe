@@ -11,7 +11,7 @@
       <h1 class="text-3xl font-bold text-base-content">{{ contract.title }}</h1>
       <p class="text-base-content/60 mt-1">ID: <span class="font-mono">{{ contract.id }}</span> • Valid: {{ contract.startDate }} - {{ contract.endDate }}</p>
     </div>
-    
+
     <div class="flex gap-2">
       <button class="btn btn-primary gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -29,7 +29,7 @@
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    
+
     <!-- PDF Viewer Area -->
     <div class="lg:col-span-2">
       <div class="card bg-base-100 shadow-sm border border-base-200 h-[600px] flex flex-col">
@@ -42,7 +42,7 @@
           <span class="text-xs font-mono opacity-50">lease_agreement_v2.pdf</span>
           <div class="w-8"></div>
         </div>
-        
+
         <!-- Mock PDF Content -->
         <div class="flex-1 bg-base-100 p-8 overflow-y-auto relative">
           <div class="max-w-2xl mx-auto space-y-6 opacity-70 select-none pointer-events-none">
@@ -60,11 +60,11 @@
               <span class="text-base-content/20 font-bold text-2xl">DOCUMENT PREVIEW</span>
             </div>
             <div class="space-y-2">
-               <div class="h-4 bg-base-200 w-full"></div>
-               <div class="h-4 bg-base-200 w-3/4"></div>
+              <div class="h-4 bg-base-200 w-full"></div>
+              <div class="h-4 bg-base-200 w-3/4"></div>
             </div>
           </div>
-          
+
           <!-- "Verified" Stamp -->
           <div class="absolute bottom-10 right-10 rotate-[-15deg] border-4 border-success text-success font-black text-4xl p-4 rounded opacity-30">
             SIGNED & ACTIVE
@@ -75,28 +75,32 @@
 
     <!-- Sidebar: History & Timeline -->
     <div class="space-y-6">
-      
+
       <!-- Version History -->
       <div class="card bg-base-100 shadow-sm border border-base-200">
         <div class="card-body">
           <h2 class="card-title text-base mb-4">Version History</h2>
           <div class="space-y-4">
-            <div *ngFor="let v of versions" class="flex items-start gap-3 pb-4 border-b border-base-200 last:border-0 last:pb-0">
-              <div class="mt-1">
+            @for (v of versions; track v) {
+              <div class="flex items-start gap-3 pb-4 border-b border-base-200 last:border-0 last:pb-0">
+                <div class="mt-1">
                 <div class="badge badge-sm" [ngClass]="{
                   'badge-success': v.status === 'Active',
                   'badge-ghost': v.status !== 'Active'
                 }">{{ v.version }}</div>
-              </div>
-              <div class="flex-1">
-                <div class="flex justify-between items-start">
-                  <p class="font-bold text-sm">{{ v.reason }}</p>
-                  <span class="text-xs text-base-content/50">{{ v.date }}</span>
                 </div>
-                <p class="text-xs text-base-content/60 mt-1">{{ v.status }}</p>
-                <button *ngIf="v.status !== 'Active'" class="btn btn-link btn-xs p-0 h-auto min-h-0 mt-1 text-primary no-underline hover:underline">View</button>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start">
+                    <p class="font-bold text-sm">{{ v.reason }}</p>
+                    <span class="text-xs text-base-content/50">{{ v.date }}</span>
+                  </div>
+                  <p class="text-xs text-base-content/60 mt-1">{{ v.status }}</p>
+                  @if (v.status !== 'Active') {
+                    <button class="btn btn-link btn-xs p-0 h-auto min-h-0 mt-1 text-primary no-underline hover:underline">View</button>
+                  }
+                </div>
               </div>
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -106,12 +110,14 @@
         <div class="card-body">
           <h2 class="card-title text-base mb-4">Lease Timeline</h2>
           <ul class="steps steps-vertical w-full">
-            <li *ngFor="let event of timeline" class="step" [ngClass]="{'step-primary': event.status === 'completed'}">
-              <div class="text-left w-full ml-2">
-                <p class="font-bold text-sm">{{ event.event }}</p>
-                <p class="text-xs opacity-60">{{ event.date }}</p>
-              </div>
-            </li>
+            @for (event of timeline; track event) {
+              <li class="step" [ngClass]="{'step-primary': event.status === 'completed'}">
+                <div class="text-left w-full ml-2">
+                  <p class="font-bold text-sm">{{ event.event }}</p>
+                  <p class="text-xs opacity-60">{{ event.date }}</p>
+                </div>
+              </li>
+            }
           </ul>
         </div>
       </div>
@@ -125,7 +131,7 @@
   <div class="modal-box">
     <h3 class="font-bold text-lg mb-4">Schedule Lease Renewal</h3>
     <p class="text-sm text-base-content/70 mb-6">Select a date for your lease renewal discussion and the desired term length.</p>
-    
+
     <div class="form-control w-full mb-4">
       <label class="label">
         <span class="label-text font-medium">Proposed Start Date</span>

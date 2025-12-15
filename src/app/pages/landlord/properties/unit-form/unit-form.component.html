@@ -1,6 +1,6 @@
 <div class="modal modal-open bg-base-300/50 backdrop-blur-sm">
   <div class="modal-box w-11/12 max-w-3xl p-0 overflow-hidden shadow-2xl rounded-3xl">
-    
+
     <!-- Header -->
     <div class="bg-base-100 px-8 py-6 border-b border-base-200 flex justify-between items-center">
       <div>
@@ -11,10 +11,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
     </div>
-    
+
     <form [formGroup]="unitForm" (ngSubmit)="onSubmit()" class="p-8 bg-base-100">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         <!-- Left Column -->
         <div class="space-y-6">
           <div class="form-control w-full">
@@ -59,12 +59,14 @@
             </select>
           </div>
 
-          <div class="form-control w-full" *ngIf="unitForm.get('status')?.value === 'Occupied'">
-            <label class="label px-0">
-              <span class="label-text font-medium text-base">Current Tenant Name</span>
-            </label>
-            <input type="text" formControlName="currentTenantName" placeholder="Tenant Name" class="input input-lg input-bordered w-full bg-base-200 focus:bg-base-100 transition-colors" />
-          </div>
+          @if (unitForm.get('status')?.value === 'Occupied') {
+            <div class="form-control w-full">
+              <label class="label px-0">
+                <span class="label-text font-medium text-base">Current Tenant Name</span>
+              </label>
+              <input type="text" formControlName="currentTenantName" placeholder="Tenant Name" class="input input-lg input-bordered w-full bg-base-200 focus:bg-base-100 transition-colors" />
+            </div>
+          }
         </div>
       </div>
 

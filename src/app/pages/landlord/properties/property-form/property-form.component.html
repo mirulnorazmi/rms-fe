@@ -1,6 +1,6 @@
 <div class="modal modal-open bg-base-300/50 backdrop-blur-sm">
   <div class="modal-box w-11/12 max-w-3xl p-0 overflow-hidden shadow-2xl rounded-3xl">
-    
+
     <!-- Header -->
     <div class="bg-base-100 px-8 py-6 border-b border-base-200 flex justify-between items-center">
       <div>
@@ -11,10 +11,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
       </button>
     </div>
-    
+
     <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="p-8 bg-base-100">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         <!-- Left Column: Basic Info -->
         <div class="space-y-6">
           <div class="form-control w-full">
@@ -22,9 +22,11 @@
               <span class="label-text font-medium text-base">Property Name</span>
             </label>
             <input type="text" formControlName="name" placeholder="e.g. Sunset Heights" class="input input-lg input-bordered w-full bg-base-200 focus:bg-base-100 transition-colors" [class.input-error]="propertyForm.get('name')?.invalid && propertyForm.get('name')?.touched" />
-            <label class="label px-0 pt-1" *ngIf="propertyForm.get('name')?.invalid && propertyForm.get('name')?.touched">
-              <span class="label-text-alt text-error">Name is required</span>
-            </label>
+            @if (propertyForm.get('name')?.invalid && propertyForm.get('name')?.touched) {
+              <label class="label px-0 pt-1">
+                <span class="label-text-alt text-error">Name is required</span>
+              </label>
+            }
           </div>
 
           <div class="form-control w-full">
@@ -46,9 +48,11 @@
               <span class="label-text font-medium text-base">Address</span>
             </label>
             <textarea formControlName="address" placeholder="123 Main St, City, State, Zip" class="textarea textarea-lg textarea-bordered h-32 w-full bg-base-200 focus:bg-base-100 transition-colors" [class.textarea-error]="propertyForm.get('address')?.invalid && propertyForm.get('address')?.touched"></textarea>
-            <label class="label px-0 pt-1" *ngIf="propertyForm.get('address')?.invalid && propertyForm.get('address')?.touched">
-              <span class="label-text-alt text-error">Address is required</span>
-            </label>
+            @if (propertyForm.get('address')?.invalid && propertyForm.get('address')?.touched) {
+              <label class="label px-0 pt-1">
+                <span class="label-text-alt text-error">Address is required</span>
+              </label>
+            }
           </div>
         </div>
       </div>

@@ -29,6 +29,14 @@ export class NavbarComponent {
 
   // Menu configurations for each role
   menus = {
+    admin: [
+      { id: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
+      { id: 'landlords', label: 'Landlords', route: '/admin/landlords' },
+      { id: 'subscription', label: 'Subscriptions', route: '/admin/subscription/plans' },
+      { id: 'portals', label: 'Portals', route: '/admin/portals' },
+      { id: 'system', label: 'System', route: '/admin/system' },
+      { id: 'audit', label: 'Audit', route: '/admin/audit' }
+    ],
     landlord: [
       { id: 'dashboard', label: 'Dashboard', route: '/landlord/dashboard' },
       { id: 'tenants', label: 'My Tenants', route: '/landlord/tenants' },

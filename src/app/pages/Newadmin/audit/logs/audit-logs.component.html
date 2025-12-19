@@ -1,0 +1,87 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Audit & Monitoring</h1>
+
+  <div class="tabs tabs-boxed mb-6 bg-base-100">
+    <a class="tab" [class.tab-active]="activeTab === 'activity'" (click)="activeTab = 'activity'">Activity Logs</a>
+    <a class="tab" [class.tab-active]="activeTab === 'conflicts'" (click)="activeTab = 'conflicts'">Booking Conflicts</a>
+    <a class="tab" [class.tab-active]="activeTab === 'errors'" (click)="activeTab = 'errors'">Error Monitoring</a>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      
+      <!-- Activity Logs -->
+      <div *ngIf="activeTab === 'activity'" class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of logs">
+              <td class="font-mono text-xs">{{ log.timestamp }}</td>
+              <td>{{ log.user }}</td>
+              <td><span class="font-bold">{{ log.action }}</span></td>
+              <td>{{ log.details }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Booking Conflicts -->
+      <div *ngIf="activeTab === 'conflicts'" class="overflow-x-auto">
+        <h3 class="font-bold text-lg mb-4 text-warning">Detected Conflicts</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Property</th>
+              <th>Platform</th>
+              <th>Issue</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of conflicts">
+              <td class="font-mono text-xs">{{ c.timestamp }}</td>
+              <td>{{ c.property }}</td>
+              <td>{{ c.platform }}</td>
+              <td class="text-error font-bold">{{ c.issue }}</td>
+              <td><button class="btn btn-xs btn-outline">Resolve</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Error Logs -->
+      <div *ngIf="activeTab === 'errors'" class="overflow-x-auto">
+        <h3 class="font-bold text-lg mb-4 text-error">System Errors</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Service</th>
+              <th>Error Message</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of errors">
+              <td class="font-mono text-xs">{{ e.timestamp }}</td>
+              <td>{{ e.service }}</td>
+              <td>{{ e.error }}</td>
+              <td>
+                <div class="badge" [ngClass]="{'badge-error': e.severity === 'High', 'badge-warning': e.severity === 'Medium'}">{{ e.severity }}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

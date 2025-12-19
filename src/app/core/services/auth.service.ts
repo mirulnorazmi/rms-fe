@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-export type UserRole = 'landlord' | 'tenant' | 'guest';
+export type UserRole = 'landlord' | 'tenant' | 'guest' | 'admin';
 
 @Injectable({
   providedIn: 'root'

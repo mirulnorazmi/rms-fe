@@ -1,0 +1,63 @@
+<div class="p-6">
+  <div class="text-sm breadcrumbs mb-6">
+    <ul>
+      <li><a routerLink="/admin/dashboard">Admin</a></li>
+      <li><a routerLink="/admin/landlords">Landlords</a></li>
+      <li>{{ landlord.name }}</li>
+    </ul>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <div class="flex justify-between items-start">
+        <div>
+          <h2 class="card-title text-2xl">{{ landlord.name }}</h2>
+          <p class="text-base-content/70">{{ landlord.email }}</p>
+        </div>
+        <div class="badge badge-lg" [ngClass]="{'badge-success': landlord.status === 'Active'}">{{ landlord.status }}</div>
+      </div>
+      
+      <div class="divider"></div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <div class="text-sm opacity-70">Subscription Plan</div>
+          <div class="font-bold text-lg">{{ landlord.plan }}</div>
+        </div>
+        <div>
+          <div class="text-sm opacity-70">Managed Units</div>
+          <div class="font-bold text-lg">{{ landlord.units }}</div>
+        </div>
+        <div>
+          <div class="text-sm opacity-70">Portal URL</div>
+          <a href="#" class="link link-primary font-bold">{{ landlord.portal }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Subscription Info -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title">Subscription & Billing</h3>
+        <p>Next billing date: <span class="font-bold">Oct 15, 2024</span></p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-sm">Manage Subscription</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h3 class="card-title text-error">Danger Zone</h3>
+        <p>Suspend access or delete account.</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-error btn-outline btn-sm">Suspend Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

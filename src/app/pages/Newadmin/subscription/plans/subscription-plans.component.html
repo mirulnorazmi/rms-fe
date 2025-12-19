@@ -1,0 +1,25 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Subscription Plans</h1>
+    <button class="btn btn-primary">Add New Plan</button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div *ngFor="let plan of plans" class="card bg-base-100 shadow-xl border border-base-200">
+      <div class="card-body">
+        <h2 class="card-title justify-center text-2xl">{{ plan.name }}</h2>
+        <div class="text-center my-4">
+          <span class="text-4xl font-bold">{{ plan.price }}</span>
+        </div>
+        <p class="text-center mb-4 text-sm opacity-70">{{ plan.units }} units</p>
+        <ul class="list-disc list-inside mb-6">
+          <li *ngFor="let feature of plan.features">{{ feature }}</li>
+        </ul>
+        <div class="card-actions justify-center">
+          <button class="btn btn-outline btn-primary w-full">Edit Plan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

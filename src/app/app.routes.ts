@@ -29,6 +29,16 @@ import { DocumentListComponent } from './pages/landlord/documents/document-list/
 import { DocumentViewerComponent } from './pages/landlord/documents/document-viewer/document-viewer.component';
 import { RegisterComponent } from './pages/register/register.component';
 
+// Admin Components (New Module)
+import { AdminDashboardComponent } from './pages/Newadmin/dashboard/admin-dashboard.component';
+import { LandlordListComponent } from './pages/Newadmin/landlord/landlord-list/landlord-list.component';
+import { LandlordDetailComponent } from './pages/Newadmin/landlord/landlord-detail/landlord-detail.component';
+import { SubscriptionPlansComponent } from './pages/Newadmin/subscription/plans/subscription-plans.component';
+import { PaymentLogsComponent } from './pages/Newadmin/subscription/logs/payment-logs.component';
+import { PortalListComponent } from './pages/Newadmin/portal/portal-list/portal-list.component';
+import { SystemSettingsComponent } from './pages/Newadmin/system/settings/system-settings.component';
+import { AuditLogsComponent } from './pages/Newadmin/audit/logs/audit-logs.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -80,6 +90,17 @@ export const routes: Routes = [
   // Tenant Notifications & Documents
   { path: 'tenant/notifications', component: NotificationsComponent },
   { path: 'tenant/documents', component: DocumentVaultComponent },
+
+  // Admin Routes
+  { path: 'admin', redirectTo: 'admin/dashboard', pathMatch: 'full' },
+  { path: 'admin/dashboard', component: AdminDashboardComponent },
+  { path: 'admin/landlords', component: LandlordListComponent },
+  { path: 'admin/landlords/:id', component: LandlordDetailComponent },
+  { path: 'admin/subscription/plans', component: SubscriptionPlansComponent },
+  { path: 'admin/subscription/logs', component: PaymentLogsComponent },
+  { path: 'admin/portals', component: PortalListComponent },
+  { path: 'admin/system', component: SystemSettingsComponent },
+  { path: 'admin/audit', component: AuditLogsComponent },
 
   { path: '**', component: NotFoundComponent },
 ];

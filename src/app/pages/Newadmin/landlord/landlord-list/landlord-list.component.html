@@ -1,0 +1,39 @@
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Landlord Management</h1>
+    <button class="btn btn-primary">Create Landlord</button>
+  </div>
+
+  <div class="overflow-x-auto card bg-base-100 shadow-xl">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Plan</th>
+          <th>Units</th>
+          <th>Portal</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of landlords">
+          <td>
+            <div class="font-bold">{{ l.name }}</div>
+          </td>
+          <td>{{ l.plan }}</td>
+          <td>{{ l.units }}</td>
+          <td><a href="#" class="link link-primary">{{ l.portal }}</a></td>
+          <td>
+            <div class="badge" [ngClass]="{'badge-success': l.status === 'Active', 'badge-error': l.status === 'Suspended'}">{{ l.status }}</div>
+          </td>
+          <td>
+            <button class="btn btn-ghost btn-xs" [routerLink]="['/admin/landlords', l.id]">Details</button>
+            <button class="btn btn-ghost btn-xs text-error">Suspend</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

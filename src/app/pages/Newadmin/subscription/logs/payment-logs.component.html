@@ -1,0 +1,29 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Payment Logs</h1>
+
+  <div class="overflow-x-auto card bg-base-100 shadow-xl">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Landlord</th>
+          <th>Amount</th>
+          <th>Method</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td>{{ log.date }}</td>
+          <td>{{ log.landlord }}</td>
+          <td>{{ log.amount }}</td>
+          <td>{{ log.method }}</td>
+          <td>
+            <div class="badge" [ngClass]="{'badge-success': log.status === 'Success', 'badge-error': log.status === 'Failed'}">{{ log.status }}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

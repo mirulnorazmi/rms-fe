@@ -1,0 +1,19 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Generated Portals</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let portal of portals" class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">{{ portal.name }}</h2>
+        <a href="https://{{portal.url}}" target="_blank" class="link link-primary">{{ portal.url }}</a>
+        <p class="text-sm opacity-70">Created: {{ portal.created }}</p>
+        <div class="card-actions justify-end mt-4">
+          <div class="badge" [ngClass]="{'badge-success': portal.status === 'Active', 'badge-ghost': portal.status === 'Disabled'}">{{ portal.status }}</div>
+          <button class="btn btn-sm btn-outline" *ngIf="portal.status === 'Active'">Disable</button>
+          <button class="btn btn-sm btn-outline btn-success" *ngIf="portal.status === 'Disabled'">Enable</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

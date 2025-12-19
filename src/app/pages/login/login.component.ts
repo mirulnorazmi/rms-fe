@@ -21,7 +21,9 @@ export class LoginComponent {
     if (role === 'landlord') {
       this.router.navigate(['/landlord/dashboard']); // Assuming this route exists
     } else if (role === 'tenant') {
-      this.router.navigate(['/tenant/dashboard']); // Assuming this route exists
+      this.router.navigate(['/tenant/dashboard']);
+    } else if (role === 'admin') {
+      this.router.navigate(['/admin/dashboard']); // Assuming this route exists
     } else {
        this.router.navigate(['/dashboard']); // Default/Admin dashboard
     }

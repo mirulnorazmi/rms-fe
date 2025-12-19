@@ -1,0 +1,59 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">System Configuration</h1>
+
+  <div class="tabs tabs-boxed mb-6 bg-base-100">
+    <a class="tab" [class.tab-active]="activeTab === 'payment'" (click)="activeTab = 'payment'">Payment Gateway</a>
+    <a class="tab" [class.tab-active]="activeTab === 'email'" (click)="activeTab = 'email'">Email Templates</a>
+    <a class="tab" [class.tab-active]="activeTab === 'ota'" (click)="activeTab = 'ota'">OTA Integrations</a>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <!-- Payment Settings -->
+      <div *ngIf="activeTab === 'payment'">
+        <h2 class="card-title mb-4">Payment Gateway Settings</h2>
+        <div class="form-control w-full max-w-xs mb-4">
+          <label class="label"><span class="label-text">Stripe API Key</span></label>
+          <input type="password" placeholder="sk_live_..." class="input input-bordered w-full max-w-xs" />
+        </div>
+        <div class="form-control w-full max-w-xs mb-4">
+          <label class="label"><span class="label-text">PayPal Client ID</span></label>
+          <input type="text" placeholder="Client ID" class="input input-bordered w-full max-w-xs" />
+        </div>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+
+      <!-- Email Settings -->
+      <div *ngIf="activeTab === 'email'">
+        <h2 class="card-title mb-4">Email Templates</h2>
+        <div class="form-control mb-4">
+          <label class="label"><span class="label-text">Welcome Email Subject</span></label>
+          <input type="text" value="Welcome to Rental Platform" class="input input-bordered" />
+        </div>
+        <div class="form-control mb-4">
+          <label class="label"><span class="label-text">Body</span></label>
+          <textarea class="textarea textarea-bordered h-24">Hi ahmad, welcome to our platform...</textarea>
+        </div>
+        <button class="btn btn-primary">Save Template</button>
+      </div>
+
+      <!-- OTA Settings -->
+      <div *ngIf="activeTab === 'ota'">
+        <h2 class="card-title mb-4">OTA Integrations</h2>
+        <div class="form-control mb-2">
+          <label class="label cursor-pointer justify-start gap-4">
+            <span class="label-text">Enable Airbnb Sync</span> 
+            <input type="checkbox" checked="checked" class="toggle toggle-primary" />
+          </label>
+        </div>
+        <div class="form-control mb-2">
+          <label class="label cursor-pointer justify-start gap-4">
+            <span class="label-text">Enable Booking.com Sync</span> 
+            <input type="checkbox" class="toggle toggle-secondary" />
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
